@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Gabarito:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;font-family:'Hanken Grotesk',system-ui,sans-serif;}
+  @keyframes breathe{0%,100%{transform:scale(.62);opacity:.5}45%,55%{transform:scale(1);opacity:1}}
+  @keyframes twinkle{0%,100%{opacity:.18}50%{opacity:.95}}
+  @keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+  @keyframes glowpulse{0%,100%{opacity:.35}50%{opacity:.8}}
+  @keyframes sway{0%,100%{transform:rotate(-3.5deg)}50%{transform:rotate(3.5deg)}}
+</style>
+</helmet>
+
+<div style="position:absolute;left:80px;top:36px;width:1000px">
+  <div style="font:600 12px/1 'Hanken Grotesk';letter-spacing:.26em;text-transform:uppercase;color:#a08e78">Visual exploration · 4 directions × mobile + moment + desktop</div>
+  <div style="font:400 40px/1.05 'Spectral';color:#2a2119;margin-top:12px;letter-spacing:-.01em">The Small Good Moments</div>
+  <div style="font:400 16px/1.5 'Hanken Grotesk';color:#6f5e4b;margin-top:8px;max-width:60ch">Same field guide, four moods. Each row pairs a phone home, the breathing <em>moment mode</em>, and a desktop hero — calm, zen, warm, inspirational. Mix and match what you like.</div>
+</div>
+
+<!-- ============ DIRECTION 1 · PAPER ALMANAC ============ -->
+<div data-drags-parent="1" style="position:absolute;left:80px;top:188px;width:760px">
+  <div style="font:600 12px/1 'Hanken Grotesk';letter-spacing:.22em;text-transform:uppercase;color:#b8542f">Direction 01</div>
+  <div style="font:500 27px/1 'Spectral';color:#2a2119;margin-top:7px">Paper Almanac</div>
+  <div style="font:400 14px/1.5 'Hanken Grotesk';color:#8a7a64;margin-top:4px">Editorial field guide · ruled paper, ink &amp; honey · warm daylight</div>
+</div>
+
+<!-- D1 home -->
+<div style="position:absolute;left:80px;top:300px">
+  <div style="font:500 11px/1 'Hanken Grotesk';letter-spacing:.14em;text-transform:uppercase;color:#a08e78;margin-bottom:10px">Phone · home</div>
+  <div style="position:relative;width:300px;height:600px;border-radius:44px;padding:9px;background:#231d17;box-shadow:0 30px 60px -28px rgba(40,28,12,.55),0 0 0 1px rgba(0,0,0,.25)">
+    <div style="position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:#f3ead7">
+      <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:26px;background:#231d17;border-radius:0 0 16px 16px;z-index:6"></div>
+      <div style="padding:16px 20px 0">
+        <div style="display:flex;justify-content:space-between;align-items:center;font:600 12px 'Hanken Grotesk';color:#6f5e4b;height:24px"><span>9:41</span><span style="letter-spacing:.1em">· · ·</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:14px">
+          <div style="font:600 10px 'Hanken Grotesk';letter-spacing:.22em;text-transform:uppercase;color:#a08e78">Field Guide</div>
+          <div style="font:600 10px 'Hanken Grotesk';letter-spacing:.18em;text-transform:uppercase;color:#a08e78">Tue · 8:41</div>
+        </div>
+        <div style="height:1px;background:#e6d8c2;margin:10px 0 16px"></div>
+        <div style="position:relative;background:#fbf6ec;border:1px solid #e6d8c2;border-radius:18px;padding:18px 18px 16px;box-shadow:0 14px 30px -22px rgba(70,48,20,.4)">
+          <svg viewBox="0 0 24 24" style="position:absolute;top:16px;right:16px;width:34px;height:34px" fill="none" stroke="#d8932a" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6 7 7M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4"/></svg>
+          <div style="font:600 10px 'Hanken Grotesk';letter-spacing:.18em;text-transform:uppercase;color:#2e5a4f">Right now · morning</div>
+          <div style="font:500 32px/1 'Spectral';color:#2a2119;margin:8px 0 2px">Fika</div>
+          <div style="font:italic 400 13px 'Spectral';color:#a08e78">/ FEE-ka /</div>
+          <div style="font:400 13.5px/1.5 'Hanken Grotesk';color:#6f5e4b;margin:9px 0 14px">A coffee-and-cake break, taken seriously, with others.</div>
+          <div style="display:inline-flex;align-items:center;gap:7px;background:#2e5a4f;color:#fdf6e9;font:600 13px 'Hanken Grotesk';padding:10px 16px;border-radius:999px">Try this now <svg viewBox="0 0 24 24" style="width:14px;height:14px" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h13M12 6l6 6-6 6"/></svg></div>
+        </div>
+        <div style="font:600 10px 'Hanken Grotesk';letter-spacing:.2em;text-transform:uppercase;color:#a08e78;margin:18px 0 4px">More for today</div>
+        <div style="display:flex;align-items:center;gap:13px;padding:12px 0;border-bottom:1px solid #e6d8c2">
+          <div style="flex:none;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:rgba(46,90,79,.08);color:#2e5a4f"><svg viewBox="0 0 24 24" style="width:22px;height:22px" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-5M12 16c-2.4 0-3.4-1.6-3.4-3.2C8.6 10 12 5 12 5s3.4 5 3.4 7.8C15.4 14.4 14.4 16 12 16z"/></svg></div>
+          <div><div style="font:500 17px 'Spectral';color:#2a2119">Shinrin-yoku</div><div style="font:600 10px 'Hanken Grotesk';letter-spacing:.12em;text-transform:uppercase;color:#d8932a">Japan</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:13px;padding:12px 0">
+          <div style="flex:none;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:rgba(46,90,79,.08);color:#2e5a4f"><svg viewBox="0 0 24 24" style="width:22px;height:22px" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="10" width="6" height="9" rx="1.5"/><path d="M12 10V8"/><path d="M12 3c1.2 1.5 2 2.5 2 3.4A2 2 0 0 1 10 6.4C10 5.5 10.8 4.5 12 3z"/></svg></div>
+          <div><div style="font:500 17px 'Spectral';color:#2a2119">Hygge</div><div style="font:600 10px 'Hanken Grotesk';letter-spacing:.12em;text-transform:uppercase;color:#d8932a">Denmark</div></div>
+        </div>
+      </div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:56px;background:#fbf6ec;border-top:1px solid #e6d8c2;display:flex;align-items:center;justify-content:space-around;color:#a08e78">
+        <svg viewBox="0 0 24 24" style="width:22px;height:22px;color:#2e5a4f" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7M5 10v10h14V10"/></svg>
+        <svg viewBox="0 0 24 24" style="width:22px;height:22px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+        <svg viewBox="0 0 24 24" style="width:22px;height:22px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.4 5.6L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.6-.4z"/></svg>
+        <svg viewBox="0 0 24 24" style="width:22px;height:22px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- D1 moment -->
+<div style="position:absolute;left:412px;top:300px">
+  <div style="font:500 11px/1 'Hanken Grotesk';letter-spacing:.14em;text-transform:uppercase;color:#a08e78;margin-bottom:10px">Phone · moment mode</div>
+  <div style="position:relative;width:300px;height:600px;border-radius:44px;padding:9px;background:#231d17;box-shadow:0 30px 60px -28px rgba(40,28,12,.55),0 0 0 1px rgba(0,0,0,.25)">
+    <div style="position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:linear-gradient(170deg,#cde0d4 0%,#e9ddc6 55%,#f3ead7 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px">
+      <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:26px;background:#231d17;border-radius:0 0 16px 16px;z-index:6"></div>
+      <div style="font:600 10px 'Hanken Grotesk';letter-spacing:.24em;text-transform:uppercase;color:#2e5a4f">Moment mode</div>
+      <div style="font:500 38px/1 'Spectral';color:#2a2119;margin:10px 0 6px">Fika</div>
+      <div style="font:italic 400 14px/1.4 'Spectral';color:#6f5e4b;max-width:24ch">reset, connected, and reminded the day isn't only work</div>
+      <div style="position:relative;width:190px;height:190px;margin:34px 0;display:grid;place-items:center">
+        <div style="position:absolute;inset:0;border-radius:999px;background:radial-gradient(circle,rgba(243,194,90,.4),rgba(243,194,90,.05) 70%);border:2px solid rgba(46,90,79,.45);animation:breathe 11s ease-in-out infinite"></div>
+        <div style="font:500 40px 'Spectral';color:#2a2119;z-index:2">2:00</div>
+        <div style="position:absolute;bottom:-30px;font:600 11px 'Hanken Grotesk';letter-spacing:.22em;text-transform:uppercase;color:#6f5e4b">breathe in</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;width:100%">
+        <div style="background:#2e5a4f;color:#fdf6e9;font:600 14px 'Hanken Grotesk';padding:13px;border-radius:999px">I did it</div>
+        <div style="color:#2e5a4f;font:600 14px 'Hanken Grotesk';padding:11px;border-radius:999px;border:1.5px solid rgba(46,90,79,.4)">Leave quietly</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- D1 desktop -->
+<div style="position:absolute;left:744px;top:300px;width:840px">
+  <div style="font:500 11px/1 'Hanken Grotesk';letter-spacing:.14em;text-transform:uppercase;color:#a08e78;margin-bottom:10px">Desktop · hero</div>
+  <div style="width:840px;height:560px;border-radius:14px;overflow:hidden;background:#f3ead7;box-shadow:0 30px 60px -30px rgba(40,28,12,.4);border:1px solid #e6d8c2;display:flex;flex-direction:column">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 30px;border-bottom:1px solid #e6d8c2;background:rgba(251,246,236,.7)">
+      <div style="display:flex;align-items:center;gap:10px;font:600 18px 'Spectral';color:#2a2119"><svg viewBox="0 0 32 32" style="width:26px;height:26px;color:#2e5a4f" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 22Q16 4 29 22"/><circle cx="16" cy="14" r="3.4" fill="#d8932a" stroke="#d8932a"/></svg>The Small Good Moments</div>
+      <div style="display:flex;gap:24px;font:500 13px 'Hanken Grotesk';color:#6f5e4b"><span>Explore</span><span>By feeling</span><span>About</span></div>
+    </div>
+    <div style="flex:1;display:grid;grid-template-columns:1.05fr 1fr">
+      <div style="padding:48px 40px;display:flex;flex-direction:column;justify-content:center">
+        <div style="font:600 11px 'Hanken Grotesk';letter-spacing:.22em;text-transform:uppercase;color:#b8542f">A field guide to the world's gentle rituals</div>
+        <div style="font:400 42px/1.08 'Spectral';color:#2a2119;margin:16px 0 0;letter-spacing:-.01em">Every culture keeps a word for <em style="color:#b8542f">feeling well</em>. Borrow one today.</div>
+        <div style="font:400 15px/1.6 'Hanken Grotesk';color:#6f5e4b;margin:18px 0 26px;max-width:42ch">Niksen, fika, friluftsliv, sobremesa — small repeatable rituals for being a little more alive. Pick a feeling, or let the day choose.</div>
+        <div style="display:flex;gap:12px"><div style="background:#2e5a4f;color:#fdf6e9;font:600 14px 'Hanken Grotesk';padding:13px 22px;border-radius:999px">Find a moment</div><div style="color:#2e5a4f;font:600 14px 'Hanken Grotesk';padding:13px 22px;border-radius:999px;border:1.5px solid #2e5a4f">Surprise me</div></div>
+      </div>
+      <div style="position:relative;background:linear-gradient(165deg,#7fb7e0,#bfe0ee 50%,#f6ead0);overflow:hidden">
+        <svg viewBox="0 0 24 24" style="position:absolute;top:40px;right:46px;width:74px;height:74px;animation:drift 7s ease-in-out infinite" fill="none" stroke="#fff4d6" stroke-width="1.4" stroke-linecap="round"><circle cx="12" cy="12" r="5" fill="#ffe9a8" stroke="#ffe9a8"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg>
+        <svg viewBox="0 0 400 300" preserveAspectRatio="none" style="position:absolute;bottom:0;left:0;width:100%;height:62%"><path d="M0 120 Q120 70 230 100 T400 96 V300 H0Z" fill="#3a6b5d"/><path d="M0 170 Q140 120 280 158 Q360 178 400 150 V300 H0Z" fill="#2e5a4f"/></svg>
+        <div style="position:absolute;left:30px;bottom:30px;right:30px;background:#fbf6ec;border:1px solid #e6d8c2;border-radius:16px;padding:16px 18px;box-shadow:0 18px 40px -24px rgba(40,28,12,.5)">
+          <div style="font:600 10px 'Hanken Grotesk';letter-spacing:.16em;text-transform:uppercase;color:#2e5a4f">Right now · morning</div>
+          <div style="font:500 24px 'Spectral';color:#2a2119;margin:5px 0 3px">Fika</div>
+          <div style="font:400 12.5px/1.45 'Hanken Grotesk';color:#6f5e4b">Somewhere a kettle is on and the morning break is sacred.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ DIRECTION 2 · NIGHTFALL LANTERN ============ -->
+<div data-drags-parent="1" style="position:absolute;left:80px;top:1010px;width:760px">
+  <div style="font:600 12px/1 'DM Sans';letter-spacing:.22em;text-transform:uppercase;color:#e0913f">Direction 02</div>
+  <div style="font:500 27px/1 'Cormorant Garamond';color:#2a2119;margin-top:7px">Nightfall Lantern</div>
+  <div style="font:400 14px/1.5 'Hanken Grotesk';color:#8a7a64;margin-top:4px">Candlelit dark mode · indigo dusk, honey glow &amp; moonlight · calm at night</div>
+</div>
+
+<!-- D2 home -->
+<div style="position:absolute;left:80px;top:1122px">
+  <div style="font:500 11px/1 'Hanken Grotesk';letter-spacing:.14em;text-transform:uppercase;color:#a08e78;margin-bottom:10px">Phone · home</div>
+  <div style="position:relative;width:300px;height:600px;border-radius:44px;padding:9px;background:#0d0e1c;box-shadow:0 30px 60px -28px rgba(10,8,24,.7),0 0 0 1px rgba(0,0,0,.4)">
+    <div style="position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:linear-gradient(185deg,#161a39 0%,#241a36 60%,#33223c 100%)">
+      <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:26px;background:#0d0e1c;border-radius:0 0 16px 16px;z-index:6"></div>
+      <span style="position:absolute;top:48px;left:38px;width:2px;height:2px;border-radius:9px;background:#fff;animation:twinkle 3.5s ease-in-out infinite"></span>
+      <span style="position:absolute;top:70px;left:96px;width:2px;height:2px;border-radius:9px;background:#fff;animation:twinkle 4.2s ease-in-out .6s infinite"></span>
+      <span style="position:absolute;top:58px;left:210px;width:3px;height:3px;border-radius:9px;background:#fff;animation:twinkle 3s ease-in-out 1s infinite"></span>
+      <span style="position:absolute;top:96px;left:160px;width:2px;height:2px;border-radius:9px;background:#fff;animation:twinkle 4.6s ease-in-out .3s infinite"></span>
+      <div style="padding:16px 20px 0;position:relative;z-index:2">
+        <div style="display:flex;justify-content:space-between;align-items:center;font:600 12px 'Hanken Grotesk';color:#cdbfa6;height:24px"><span>9:41</span><span style="letter-spacing:.1em">· · ·</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:14px">
+          <div style="font:600 10px 'DM Sans';letter-spacing:.22em;text-transform:uppercase;color:#a99a7e">Field Guide</div>
+          <div style="font:600 10px 'DM Sans';letter-spacing:.18em;text-transform:uppercase;color:#a99a7e">Tonight · 9:41</div>
+        </div>
+        <div style="height:1px;background:rgba(244,234,210,.12);margin:10px 0 16px"></div>
+        <div style="position:relative;background:rgba(255,250,240,.06);border:1px solid rgba(244,234,210,.16);border-radius:18px;padding:18px;backdrop-filter:blur(4px);box-shadow:0 0 50px -10px rgba(243,194,90,.25) inset">
+          <svg viewBox="0 0 24 24" style="position:absolute;top:15px;right:15px;width:34px;height:34px" fill="none" stroke="#f3c25a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="11" width="6" height="8" rx="1.5"/><path d="M12 11V9"/><path d="M12 3.5c1.3 1.6 2.1 2.6 2.1 3.6A2.1 2.1 0 0 1 9.9 7.1c0-1 .8-2 2.1-3.6z" fill="#f3c25a" stroke="#f3c25a"/></svg>
+          <div style="font:600 10px 'DM Sans';letter-spacing:.18em;text-transform:uppercase;color:#f3c25a">Right now · night</div>
+          <div style="font:500 36px/1 'Cormorant Garamond';color:#f6ecd6;margin:6px 0 2px">Hygge</div>
+          <div style="font:italic 400 13px 'Cormorant Garamond';color:#b9a98f">/ HOO-guh /</div>
+          <div style="font:400 13px/1.5 'Hanken Grotesk';color:#cabda3;margin:9px 0 14px">Cosy contentment, built from small warm things.</div>
+          <div style="display:inline-flex;align-items:center;gap:7px;background:#f3c25a;color:#2a1f12;font:600 13px 'Hanken Grotesk';padding:10px 16px;border-radius:999px">Try this now <svg viewBox="0 0 24 24" style="width:14px;height:14px" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h13M12 6l6 6-6 6"/></svg></div>
+        </div>
+        <div style="font:600 10px 'DM Sans';letter-spacing:.2em;text-transform:uppercase;color:#a99a7e;margin:18px 0 4px">Also tonight</div>
+        <div style="display:flex;align-items:center;gap:13px;padding:12px 0;border-bottom:1px solid rgba(244,234,210,.1)">
+          <div style="flex:none;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:rgba(243,194,90,.12);color:#f3c25a"><svg viewBox="0 0 24 24" style="width:22px;height:22px" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14a8 8 0 1 1-9-9 6.5 6.5 0 0 0 9 9z"/></svg></div>
+          <div><div style="font:500 18px 'Cormorant Garamond';color:#f6ecd6">Mångata</div><div style="font:600 10px 'DM Sans';letter-spacing:.12em;text-transform:uppercase;color:#e0913f">Sweden</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:13px;padding:12px 0">
+          <div style="flex:none;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:rgba(243,194,90,.12);color:#f3c25a"><svg viewBox="0 0 24 24" style="width:22px;height:22px" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20q4-9 7-12 3 3 7 12M5 20h14"/></svg></div>
+          <div><div style="font:500 18px 'Cormorant Garamond';color:#f6ecd6">Saudade</div><div style="font:600 10px 'DM Sans';letter-spacing:.12em;text-transform:uppercase;color:#e0913f">Portugal</div></div>
+        </div>
+      </div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:56px;background:rgba(13,14,28,.6);border-top:1px solid rgba(244,234,210,.1);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:space-around;color:#8a7e66">
+        <svg viewBox="0 0 24 24" style="width:22px;height:22px;color:#f3c25a" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7M5 10v10h14V10"/></svg>
+        <svg viewBox="0 0 24 24" style="width:22px;height:22px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+        <svg viewBox="0 0 24 24" style="width:22px;height:22px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.4 5.6L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.6-.4z"/></svg>
+        <svg viewBox="0 0 24 24" style="width:22px;height:22px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- D2 moment -->
+<div style="position:absolute;left:412px;top:1122px">
+  <div style="font:500 11px/1 'Hanken Grotesk';letter-spacing:.14em;text-transform:uppercase;color:#a08e78;margin-bottom:10px">Phone · moment mode</div>
+  <div style="position:relative;width:300px;height:600px;border-radius:44px;padding:9px;background:#0d0e1c;box-shadow:0 30px 60px -28px rgba(10,8,24,.7),0 0 0 1px rgba(0,0,0,.4)">
+    <div style="position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:radial-gradient(120% 70% at 50% 60%,#3a2738 0%,#241a36 45%,#13152f 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px">
+      <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:26px;background:#0d0e1c;border-radius:0 0 16px 16px;z-index:6"></div>
+      <div style="font:600 10px 'DM Sans';letter-spacing:.24em;text-transform:uppercase;color:#f3c25a">Moment mode</div>
+      <div style="font:500 44px/1 'Cormorant Garamond';color:#f6ecd6;margin:8px 0 6px">Hygge</div>
+      <div style="font:italic 400 15px/1.4 'Cormorant Garamond';color:#c9bca0;max-width:24ch">safe, warm, and quietly glad to be exactly where you are</div>
+      <div style="position:relative;width:200px;height:200px;margin:36px 0;display:grid;place-items:center">
+        <div style="position:absolute;inset:-14px;border-radius:999px;background:radial-gradient(circle,rgba(243,194,90,.4),transparent 70%);animation:glowpulse 11s ease-in-out infinite"></div>
+        <div style="position:absolute;inset:0;border-radius:999px;background:radial-gradient(circle,rgba(243,194,90,.18),rgba(243,194,90,.02) 70%);border:2px solid rgba(243,194,90,.6);animation:breathe 11s ease-in-out infinite"></div>
+        <div style="font:500 42px 'Cormorant Garamond';color:#f6ecd6;z-index:2">4:00</div>
+        <div style="position:absolute;bottom:-30px;font:600 11px 'DM Sans';letter-spacing:.22em;text-transform:uppercase;color:#cabda3">breathe in</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;width:100%">
+        <div style="background:#f3c25a;color:#2a1f12;font:600 14px 'Hanken Grotesk';padding:13px;border-radius:999px">I did it</div>
+        <div style="color:#f6ecd6;font:600 14px 'Hanken Grotesk';padding:11px;border-radius:999px;border:1.5px solid rgba(246,236,214,.35)">Leave quietly</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- D2 desktop -->
+<div style="position:absolute;left:744px;top:1122px;width:840px">
+  <div style="font:500 11px/1 'Hanken Grotesk';letter-spacing:.14em;text-transform:uppercase;color:#a08e78;margin-bottom:10px">Desktop · hero</div>
+  <div style="width:840px;height:560px;border-radius:14px;overflow:hidden;background:#14152b;box-shadow:0 30px 60px -30px rgba(10,8,24,.6);border:1px solid #2a2440;display:flex;flex-direction:column">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 30px;border-bottom:1px solid rgba(244,234,210,.1)">
+      <div style="display:flex;align-items:center;gap:10px;font:500 20px 'Cormorant Garamond';color:#f6ecd6"><svg viewBox="0 0 32 32" style="width:26px;height:26px;color:#f3c25a" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 22Q16 4 29 22"/><circle cx="16" cy="14" r="3.4" fill="#f3c25a" stroke="#f3c25a"/></svg>The Small Good Moments</div>
+      <div style="display:flex;gap:24px;font:500 13px 'Hanken Grotesk';color:#a99a7e"><span>Explore</span><span>By feeling</span><span>About</span></div>
+    </div>
+    <div style="flex:1;display:grid;grid-template-columns:1.05fr 1fr">
+      <div style="padding:48px 40px;display:flex;flex-direction:column;justify-content:center">
+        <div style="font:600 11px 'DM Sans';letter-spacing:.22em;text-transform:uppercase;color:#e0913f">A field guide to the world's gentle rituals</div>
+        <div style="font:400 44px/1.08 'Cormorant Garamond';color:#f6ecd6;margin:16px 0 0;letter-spacing:-.01em">Every culture keeps a word for <em style="color:#f3c25a">feeling well</em>. Borrow one tonight.</div>
+        <div style="font:400 15px/1.6 'Hanken Grotesk';color:#b9a98f;margin:18px 0 26px;max-width:42ch">When the dark draws in, the rituals turn warm — hygge by candlelight, the moon's path on the water, the ache of saudade.</div>
+        <div style="display:flex;gap:12px"><div style="background:#f3c25a;color:#2a1f12;font:600 14px 'Hanken Grotesk';padding:13px 22px;border-radius:999px">Find a moment</div><div style="color:#f6ecd6;font:600 14px 'Hanken Grotesk';padding:13px 22px;border-radius:999px;border:1.5px solid rgba(246,236,214,.4)">Surprise me</div></div>
+      </div>
+      <div style="position:relative;background:linear-gradient(180deg,#1b1f44,#2c2148 60%,#3a2740);overflow:hidden">
+        <span style="position:absolute;top:40px;left:50px;width:2px;height:2px;border-radius:9px;background:#fff;animation:twinkle 3.5s infinite"></span>
+        <span style="position:absolute;top:70px;left:120px;width:3px;height:3px;border-radius:9px;background:#fff;animation:twinkle 4.2s .6s infinite"></span>
+        <span style="position:absolute;top:54px;left:230px;width:2px;height:2px;border-radius:9px;background:#fff;animation:twinkle 3s 1s infinite"></span>
+        <div style="position:absolute;top:46px;right:60px;width:64px;height:64px;border-radius:999px;background:#f4ead2;box-shadow:0 0 50px 10px rgba(244,234,210,.35)"></div>
+        <svg viewBox="0 0 400 200" preserveAspectRatio="none" style="position:absolute;bottom:0;left:0;width:100%;height:48%"><rect width="400" height="200" fill="#0f1430"/><g fill="#f4ead2" opacity=".55"><rect x="300" y="14" width="30" height="6" rx="3"/><rect x="290" y="40" width="50" height="5" rx="2.5"/><rect x="298" y="64" width="34" height="5" rx="2.5"/><rect x="292" y="88" width="46" height="4" rx="2"/></g></svg>
+        <div style="position:absolute;left:30px;bottom:30px;right:30px;background:rgba(255,250,240,.07);border:1px solid rgba(244,234,210,.18);border-radius:16px;padding:16px 18px;backdrop-filter:blur(6px)">
+          <div style="font:600 10px 'DM Sans';letter-spacing:.16em;text-transform:uppercase;color:#f3c25a">Right now · night</div>
+          <div style="font:500 26px 'Cormorant Garamond';color:#f6ecd6;margin:3px 0 3px">Hygge</div>
+          <div style="font:400 12.5px/1.45 'Hanken Grotesk';color:#c9bca0">The dark is for warmth, candlelight and being indoors.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ============ DIRECTION 3 · DAWN ZEN ============ -->
+<div data-drags-parent="1" style="position:absolute;left:80px;top:1870px;width:760px">
+  <div style="font:600 12px/1 'DM Sans';letter-spacing:.22em;text-transform:uppercase;color:#c8674a">Direction 03</div>
+  <div style="font:300 28px/1 'Newsreader';color:#2a2119;margin-top:7px">Dawn Zen</div>
+  <div style="font:400 14px/1.5 'Hanken Grotesk';color:#8a7a64;margin-top:4px">Minimal &amp; spacious · soft dawn wash, one quiet circle · stillness &amp; ma</div>
+</div>
+
+<!-- D3 home -->
+<div style="position:absolute;left:80px;top:1982px">
+  <div style="font:500 11px/1 'Hanken Grotesk';letter-spacing:.14em;text-transform:uppercase;color:#a08e78;margin-bottom:10px">Phone · home</div>
+  <div style="position:relative;width:300px;height:600px;border-radius:44px;padding:9px;background:#e8d7cd;box-shadow:0 30px 60px -28px rgba(120,80,60,.4),0 0 0 1px rgba(0,0,0,.08)">
+    <div style="position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:linear-gradient(185deg,#f9e9e1 0%,#fbeede 45%,#f8f0e7 100%);display:flex;flex-direction:column">
+      <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:26px;background:#e8d7cd;border-radius:0 0 16px 16px;z-index:6"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;font:500 12px 'DM Sans';color:#b3a293;height:24px;padding:16px 24px 0"><span>9:41</span><span style="letter-spacing:.1em">· · ·</span></div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;gap:0">
+        <div style="font:600 10px 'DM Sans';letter-spacing:.3em;text-transform:uppercase;color:#c8674a">A moment for right now</div>
+        <div style="position:relative;width:172px;height:172px;display:grid;place-items:center;margin:30px 0 26px">
+          <div style="position:absolute;inset:0;border-radius:999px;border:1px solid rgba(200,103,74,.4)"></div>
+          <div style="position:absolute;inset:22px;border-radius:999px;background:radial-gradient(circle,rgba(244,200,170,.45),transparent 72%)"></div>
+          <div style="text-align:center"><div style="font:300 40px/1 'Newsreader';color:#46403a">Niksen</div><div style="font:italic 300 13px 'Newsreader';color:#b3a293;margin-top:4px">/ NIK-sen /</div></div>
+        </div>
+        <div style="font:300 17px/1.55 'Newsreader';color:#6a6058;max-width:22ch">The fine art of doing absolutely nothing, on purpose.</div>
+        <div style="margin-top:30px;font:500 13px 'DM Sans';letter-spacing:.04em;color:#c8674a;border:1.5px solid rgba(200,103,74,.5);padding:11px 26px;border-radius:999px">Begin</div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:30px;padding:0 0 30px;font:500 12px 'DM Sans';letter-spacing:.08em;color:#b3a293"><span style="color:#46403a">Today</span><span>Feelings</span><span>Gathered</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- D3 moment -->
+<div style="position:absolute;left:412px;top:1982px">
+  <div style="font:500 11px/1 'Hanken Grotesk';letter-spacing:.14em;text-transform:uppercase;color:#a08e78;margin-bottom:10px">Phone · moment mode</div>
+  <div style="position:relative;width:300px;height:600px;border-radius:44px;padding:9px;background:#e8d7cd;box-shadow:0 30px 60px -28px rgba(120,80,60,.4),0 0 0 1px rgba(0,0,0,.08)">
+    <div style="position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:linear-gradient(185deg,#f6dfd6 0%,#f9ebe0 50%,#f5eee4 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px">
+      <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:26px;background:#e8d7cd;border-radius:0 0 16px 16px;z-index:6"></div>
+      <div style="position:relative;width:230px;height:230px;display:grid;place-items:center">
+        <div style="position:absolute;inset:0;border-radius:999px;background:radial-gradient(circle,rgba(244,196,160,.55),rgba(244,196,160,.08) 70%);border:1.5px solid rgba(200,103,74,.45);animation:breathe 12s ease-in-out infinite"></div>
+        <div style="z-index:2"><div style="font:300 34px/1 'Newsreader';color:#46403a">Niksen</div></div>
+      </div>
+      <div style="margin-top:50px;font:500 11px 'DM Sans';letter-spacing:.32em;text-transform:uppercase;color:#c8674a">breathe in</div>
+      <div style="font:italic 300 15px/1.5 'Newsreader';color:#8a7d72;max-width:24ch;margin-top:20px">rest without a reason, which turns out to be the best kind</div>
+      <div style="position:absolute;bottom:34px;font:500 12px 'DM Sans';letter-spacing:.1em;color:#b3a293">tap when you're ready</div>
+    </div>
+  </div>
+</div>
+
+<!-- D3 desktop -->
+<div style="position:absolute;left:744px;top:1982px;width:840px">
+  <div style="font:500 11px/1 'Hanken Grotesk';letter-spacing:.14em;text-transform:uppercase;color:#a08e78;margin-bottom:10px">Desktop · hero</div>
+  <div style="position:relative;width:840px;height:560px;border-radius:14px;overflow:hidden;background:linear-gradient(175deg,#f9e8e0 0%,#fbeede 50%,#f8f1e8 100%);box-shadow:0 30px 60px -30px rgba(120,80,60,.3);border:1px solid #f0ddd2;display:flex;flex-direction:column">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:22px 40px">
+      <div style="font:400 17px 'Newsreader';color:#46403a;letter-spacing:.02em">The Small Good Moments</div>
+      <div style="display:flex;gap:30px;font:500 12px 'DM Sans';letter-spacing:.06em;color:#b3a293"><span>Explore</span><span>By feeling</span><span>About</span></div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 40px;position:relative">
+      <svg viewBox="0 0 600 200" style="position:absolute;top:40px;left:50%;transform:translateX(-50%);width:560px;opacity:.5" fill="none" stroke="#e0a98e" stroke-width="1"><path d="M20 180 A280 280 0 0 1 580 180"/></svg>
+      <div style="width:14px;height:14px;border-radius:999px;background:#e88c63;box-shadow:0 0 30px 6px rgba(232,140,99,.4);margin-bottom:30px"></div>
+      <div style="font:600 11px 'DM Sans';letter-spacing:.3em;text-transform:uppercase;color:#c8674a">A field guide to the world's gentle rituals</div>
+      <div style="font:300 40px/1.18 'Newsreader';color:#3a342e;margin:20px 0 0;max-width:18ch">Every culture keeps a word for <em style="color:#c8674a;font-style:italic">feeling well</em>.</div>
+      <div style="font:300 19px/1.5 'Newsreader';color:#7a6f64;margin:14px 0 30px">Borrow one today.</div>
+      <div style="font:500 13px 'DM Sans';letter-spacing:.04em;color:#c8674a;border:1.5px solid rgba(200,103,74,.5);padding:13px 30px;border-radius:999px">Find a moment</div>
+    </div>
+  </div>
+</div>
+<!-- ============ DIRECTION 4 · BOTANICAL TACTILE ============ -->
+<div data-drags-parent="1" style="position:absolute;left:80px;top:2730px;width:760px">
+  <div style="font:700 12px/1 'DM Sans';letter-spacing:.2em;text-transform:uppercase;color:#c75f3a">Direction 04</div>
+  <div style="font:700 27px/1 'Gabarito';color:#2a2119;margin-top:7px">Botanical Tactile</div>
+  <div style="font:400 14px/1.5 'Hanken Grotesk';color:#8a7a64;margin-top:4px">Earthy &amp; organic · sage, terracotta &amp; mustard, soft blobs · warm and alive</div>
+</div>
+
+<!-- D4 home -->
+<div style="position:absolute;left:80px;top:2842px">
+  <div style="font:500 11px/1 'Hanken Grotesk';letter-spacing:.14em;text-transform:uppercase;color:#a08e78;margin-bottom:10px">Phone · home</div>
+  <div style="position:relative;width:300px;height:600px;border-radius:44px;padding:9px;background:#2f4636;box-shadow:0 30px 60px -28px rgba(40,55,35,.5),0 0 0 1px rgba(0,0,0,.2)">
+    <div style="position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:#eef0dd">
+      <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:26px;background:#2f4636;border-radius:0 0 16px 16px;z-index:6"></div>
+      <div style="padding:16px 18px 0">
+        <div style="display:flex;justify-content:space-between;align-items:center;font:600 12px 'DM Sans';color:#6f7a5e;height:24px"><span>9:41</span><span style="letter-spacing:.1em">· · ·</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px">
+          <div style="font:700 16px 'Gabarito';color:#34503f">Good evening</div>
+          <div style="width:30px;height:30px;border-radius:50% 50% 48% 52% / 55% 50% 50% 45%;background:#d8a23a;display:grid;place-items:center"><svg viewBox="0 0 24 24" style="width:17px;height:17px" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2"/></svg></div>
+        </div>
+        <div style="position:relative;background:#fbfaf0;border-radius:26px;padding:18px;margin-top:16px;overflow:hidden">
+          <div style="position:absolute;top:-18px;right:-14px;width:96px;height:96px;border-radius:58% 42% 45% 55% / 52% 55% 45% 48%;background:#c75f3a"></div>
+          <svg viewBox="0 0 24 24" style="position:absolute;top:14px;right:18px;width:40px;height:40px;z-index:2" fill="none" stroke="#fbfaf0" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-6M12 15c-2.6 0-3.7-1.8-3.7-3.5C8.3 8.2 12 3 12 3s3.7 5.2 3.7 8.5C15.7 13.2 14.6 15 12 15z"/></svg>
+          <div style="font:600 10px 'DM Sans';letter-spacing:.16em;text-transform:uppercase;color:#c75f3a">Right now</div>
+          <div style="font:700 26px/1.05 'Gabarito';color:#2f3a2c;margin:7px 0 2px;max-width:7ch">Friluftsliv</div>
+          <div style="font:400 13px/1.5 'Hanken Grotesk';color:#5f6a52;margin:8px 0 14px">"Open-air life" — weaving the outdoors into ordinary days.</div>
+          <div style="display:inline-flex;align-items:center;gap:7px;background:#34503f;color:#f1f3df;font:600 13px 'Gabarito';padding:11px 18px;border-radius:999px">Try this now <svg viewBox="0 0 24 24" style="width:14px;height:14px" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h13M12 6l6 6-6 6"/></svg></div>
+        </div>
+        <div style="font:700 12px 'Gabarito';color:#6f7a5e;margin:18px 4px 8px">More to try</div>
+        <div style="display:flex;align-items:center;gap:13px;background:#fbfaf0;border-radius:20px;padding:11px 13px;margin-bottom:9px">
+          <div style="flex:none;width:42px;height:42px;border-radius:54% 46% 50% 50% / 48% 52% 48% 52%;background:#d8a23a;display:grid;place-items:center"><svg viewBox="0 0 24 24" style="width:22px;height:22px" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8q3-3 6 0q3-3 6 0M3 14q3-3 6 0q3-3 6 0"/></svg></div>
+          <div><div style="font:700 17px 'Gabarito';color:#2f3a2c">Gökotta</div><div style="font:600 10px 'DM Sans';letter-spacing:.1em;text-transform:uppercase;color:#c75f3a">Sweden</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:13px;background:#fbfaf0;border-radius:20px;padding:11px 13px">
+          <div style="flex:none;width:42px;height:42px;border-radius:48% 52% 55% 45% / 52% 48% 52% 48%;background:#7d9b6f;display:grid;place-items:center"><svg viewBox="0 0 24 24" style="width:22px;height:22px" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h11a3 3 0 1 0-3-3M5 17h7a2.5 2.5 0 1 1-2.5 2.5"/></svg></div>
+          <div><div style="font:700 17px 'Gabarito';color:#2f3a2c">Uitwaaien</div><div style="font:600 10px 'DM Sans';letter-spacing:.1em;text-transform:uppercase;color:#c75f3a">Netherlands</div></div>
+        </div>
+      </div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:58px;background:#2f4636;display:flex;align-items:center;justify-content:space-around;color:#9fb08f">
+        <svg viewBox="0 0 24 24" style="width:22px;height:22px;color:#d8a23a" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7M5 10v10h14V10"/></svg>
+        <svg viewBox="0 0 24 24" style="width:22px;height:22px" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+        <svg viewBox="0 0 24 24" style="width:22px;height:22px" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.4 5.6L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.6-.4z"/></svg>
+        <svg viewBox="0 0 24 24" style="width:22px;height:22px" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- D4 moment -->
+<div style="position:absolute;left:412px;top:2842px">
+  <div style="font:500 11px/1 'Hanken Grotesk';letter-spacing:.14em;text-transform:uppercase;color:#a08e78;margin-bottom:10px">Phone · moment mode</div>
+  <div style="position:relative;width:300px;height:600px;border-radius:44px;padding:9px;background:#2f4636;box-shadow:0 30px 60px -28px rgba(40,55,35,.5),0 0 0 1px rgba(0,0,0,.2)">
+    <div style="position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:#34503f;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px">
+      <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:26px;background:#2f4636;border-radius:0 0 16px 16px;z-index:6"></div>
+      <div style="position:absolute;top:60px;left:-30px;width:120px;height:120px;border-radius:60% 40% 55% 45% / 50% 55% 45% 50%;background:rgba(125,155,111,.4);animation:drift 9s ease-in-out infinite"></div>
+      <div style="position:absolute;bottom:80px;right:-26px;width:96px;height:96px;border-radius:48% 52% 42% 58% / 55% 48% 52% 45%;background:rgba(216,162,58,.3);animation:drift 11s ease-in-out 1s infinite"></div>
+      <div style="font:600 10px 'DM Sans';letter-spacing:.24em;text-transform:uppercase;color:#d8a23a;position:relative;z-index:2">Moment mode</div>
+      <div style="font:700 34px/1 'Gabarito';color:#f1f3df;margin:8px 0 6px;position:relative;z-index:2">Friluftsliv</div>
+      <div style="font:400 14px/1.45 'Hanken Grotesk';color:#bfcdae;max-width:24ch;position:relative;z-index:2">awake, weathered, and more alive than the indoors allows</div>
+      <div style="position:relative;width:200px;height:200px;margin:36px 0;display:grid;place-items:center;z-index:2">
+        <div style="position:absolute;inset:0;border-radius:52% 48% 55% 45% / 48% 52% 48% 52%;background:radial-gradient(circle,rgba(216,162,58,.55),rgba(216,162,58,.12) 70%);border:2px solid rgba(216,162,58,.7);animation:breathe 11s ease-in-out infinite"></div>
+        <div style="font:700 38px 'Gabarito';color:#f1f3df;z-index:2">5:00</div>
+        <div style="position:absolute;bottom:-32px;font:600 11px 'DM Sans';letter-spacing:.22em;text-transform:uppercase;color:#bfcdae">breathe in</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;width:100%;position:relative;z-index:2">
+        <div style="background:#d8a23a;color:#2f3a2c;font:700 14px 'Gabarito';padding:13px;border-radius:999px">I did it</div>
+        <div style="color:#f1f3df;font:700 14px 'Gabarito';padding:11px;border-radius:999px;border:1.5px solid rgba(241,243,223,.4)">Leave quietly</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- D4 desktop -->
+<div style="position:absolute;left:744px;top:2842px;width:840px">
+  <div style="font:500 11px/1 'Hanken Grotesk';letter-spacing:.14em;text-transform:uppercase;color:#a08e78;margin-bottom:10px">Desktop · hero</div>
+  <div style="width:840px;height:560px;border-radius:14px;overflow:hidden;background:#e6e9d4;box-shadow:0 30px 60px -30px rgba(40,55,35,.3);border:1px solid #d4d8bf;display:flex;flex-direction:column">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 36px">
+      <div style="display:flex;align-items:center;gap:10px;font:700 18px 'Gabarito';color:#34503f"><div style="width:30px;height:30px;border-radius:56% 44% 50% 50% / 50% 56% 44% 50%;background:#c75f3a;display:grid;place-items:center"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M4 18Q12 5 20 18"/></svg></div>Small Good Moments</div>
+      <div style="display:flex;gap:24px;font:600 13px 'Gabarito';color:#5f6a52"><span>Explore</span><span>By feeling</span><span>About</span></div>
+    </div>
+    <div style="flex:1;display:grid;grid-template-columns:1.08fr 1fr">
+      <div style="padding:40px;display:flex;flex-direction:column;justify-content:center">
+        <div style="font:700 11px 'DM Sans';letter-spacing:.2em;text-transform:uppercase;color:#c75f3a">A field guide to the world's gentle rituals</div>
+        <div style="font:700 44px/1.08 'Gabarito';color:#2f3a2c;margin:16px 0 0">Every culture keeps a word for <span style="position:relative;white-space:nowrap"><span style="position:absolute;inset:-2px -8px;background:#d8a23a;border-radius:40% 60% 55% 45% / 58% 45% 55% 42%;z-index:0"></span><span style="position:relative;z-index:1">feeling well</span></span>.</div>
+        <div style="font:400 15px/1.6 'Hanken Grotesk';color:#5f6a52;margin:20px 0 26px;max-width:40ch">Small repeatable rituals for being a little more alive — out in the air, around the table, among people.</div>
+        <div style="display:flex;gap:12px"><div style="background:#34503f;color:#f1f3df;font:600 14px 'Gabarito';padding:13px 24px;border-radius:999px">Find a moment</div><div style="color:#34503f;font:600 14px 'Gabarito';padding:13px 24px;border-radius:999px;border:1.5px solid #34503f">Surprise me</div></div>
+      </div>
+      <div style="position:relative;overflow:hidden">
+        <div style="position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:58% 42% 48% 52% / 52% 50% 50% 48%;background:#c75f3a;opacity:.9"></div>
+        <div style="position:absolute;bottom:-50px;left:-30px;width:180px;height:180px;border-radius:50% 50% 42% 58% / 55% 48% 52% 45%;background:#7d9b6f;opacity:.85"></div>
+        <svg viewBox="0 0 24 24" style="position:absolute;top:38px;right:46px;width:60px;height:60px;z-index:2" fill="none" stroke="#fbfaf0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-6M12 15c-2.6 0-3.7-1.8-3.7-3.5C8.3 8.2 12 3 12 3s3.7 5.2 3.7 8.5C15.7 13.2 14.6 15 12 15z"/></svg>
+        <div style="position:absolute;left:34px;bottom:34px;right:50px;background:#fbfaf0;border-radius:22px;padding:16px 18px;box-shadow:0 18px 40px -22px rgba(40,55,35,.5)">
+          <div style="font:600 10px 'DM Sans';letter-spacing:.14em;text-transform:uppercase;color:#c75f3a">Right now · evening</div>
+          <div style="font:700 24px 'Gabarito';color:#2f3a2c;margin:4px 0 3px">Friluftsliv</div>
+          <div style="font:400 12.5px/1.45 'Hanken Grotesk';color:#5f6a52">Go outside, whatever the sky is doing.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></x-dc>
+</body>
+</html>

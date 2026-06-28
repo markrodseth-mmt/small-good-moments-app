@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0}
+  @keyframes breathe{0%,100%{transform:scale(.62);opacity:.6}45%,55%{transform:scale(1);opacity:1}}
+  @keyframes tw{0%,100%{opacity:.15}50%{opacity:.9}}
+  @keyframes rise{from{opacity:0;transform:translateY(26px) scale(.98)}to{opacity:1;transform:none}}
+  @keyframes fadein{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+</style>
+</helmet>
+
+<div style="background:#f3ead7;min-height:100vh;color:#2a2119;font-family:'Hanken Grotesk',system-ui,sans-serif;font-size:17px;line-height:1.6">
+
+  <header style="position:sticky;top:0;z-index:40;background:rgba(244,236,221,.85);backdrop-filter:blur(10px);border-bottom:1px solid #e6d8c2">
+    <div style="max-width:1180px;margin:0 auto;padding:13px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px">
+      <div style="display:flex;align-items:center;gap:11px">
+        <span style="width:30px;height:30px;color:#2e5a4f;display:inline-flex"><svg viewBox="0 0 32 32" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 22Q16 4 29 22"/><circle cx="16" cy="14" r="3.6" fill="#d8932a" stroke="#d8932a"/><path d="M3 22h26"/></svg></span>
+        <b style="font-family:'Spectral',serif;font-weight:600;font-size:19px;letter-spacing:.01em">The Small Good Moments</b>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;font:500 13.5px 'Hanken Grotesk';color:#6f5e4b;background:#fbf6ec;border:1px solid #e6d8c2;padding:6px 13px;border-radius:999px">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="#d8932a"><path d="M12 2l2.4 5.6L20 8l-4 4 1 6-5-3-5 3 1-6-4-4 5.6-.4z"/></svg>
+        <span>Gathered</span><b style="color:#2a2119;font-weight:700">{{ gathered }}</b>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div style="max-width:1180px;margin:0 auto;padding:18px 24px 0">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:13px">
+        <span style="font:600 11px 'Hanken Grotesk';letter-spacing:.22em;text-transform:uppercase;color:#a08e78">A field guide to the world's gentle rituals</span>
+        <span style="font:600 11px 'Hanken Grotesk';letter-spacing:.18em;text-transform:uppercase;color:#a08e78">{{ dateLabel }}</span>
+      </div>
+
+      <div style="position:relative;height:360px;border-radius:24px;overflow:hidden;border:1px solid #e6d8c2;box-shadow:0 22px 50px -28px rgba(70,48,20,.22);background:{{ skyBg }}">
+        {{ skySceneEl }}
+        <div style="position:absolute;left:0;bottom:0;width:100%;padding:30px 34px 84px;background:linear-gradient(to top,rgba(20,12,4,.44),transparent);color:#fff8ee">
+          <span style="font:600 11px 'Hanken Grotesk';letter-spacing:.22em;text-transform:uppercase;color:rgba(255,248,238,.82)">Borrow a moment</span>
+          <h1 style="font-family:'Spectral',serif;font-weight:500;font-size:clamp(28px,4.4vw,44px);line-height:1.05;margin:.3em 0 0;max-width:18ch;letter-spacing:-.01em;text-shadow:0 2px 18px rgba(30,18,4,.35)">Every culture keeps a word for <em style="font-style:italic;color:#f3c25a">feeling well</em>. Borrow one today.</h1>
+        </div>
+      </div>
+
+      <div style="margin:-46px 24px 0;position:relative;z-index:5;background:#fbf6ec;border:1px solid #e6d8c2;border-radius:18px;box-shadow:0 18px 44px -26px rgba(70,48,20,.2);padding:22px 24px;display:flex;flex-wrap:wrap;align-items:center;gap:18px 22px;max-width:760px">
+        <div style="width:62px;height:62px;flex:none;color:{{ accent }};background:radial-gradient(circle at 50% 45%,rgba(243,194,90,.32),transparent 68%);display:grid;place-items:center;border-radius:14px">{{ nowIconEl }}</div>
+        <div style="flex:1 1 230px">
+          <span style="font:600 11px 'Hanken Grotesk';letter-spacing:.2em;text-transform:uppercase;color:{{ accent }}">{{ nowPhaseLabel }}</span>
+          <h2 style="font-family:'Spectral',serif;font-weight:600;font-size:26px;margin:2px 0 3px">{{ nowName }}</h2>
+          <p style="margin:0;color:#6f5e4b;font-size:15px;max-width:46ch">{{ nowLine }}</p>
+        </div>
+        <button onClick="{{ onTryNow }}" style="cursor:pointer;border:none;background:{{ accent }};color:#fdf6e9;font:600 15px 'Hanken Grotesk';border-radius:999px;padding:12px 20px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap">Try this now <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 6l6 6-6 6"/></svg></button>
+      </div>
+    </div>
+
+    <div style="max-width:1180px;margin:0 auto;padding:0 24px">
+      <section style="padding:60px 0 0">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:24px;flex-wrap:wrap">
+          <div>
+            <span style="font:600 11px 'Hanken Grotesk';letter-spacing:.22em;text-transform:uppercase;color:#a08e78">Find a moment</span>
+            <h2 style="font-family:'Spectral',serif;font-weight:500;font-size:clamp(26px,3.2vw,36px);margin:.16em 0 0;letter-spacing:-.01em;line-height:1.05">What do you need to feel?</h2>
+          </div>
+          <p style="margin:0;color:#6f5e4b;max-width:40ch;font-size:15.5px">Each ritual below is a real, repeatable thing you can actually do. Pick a feeling, or let the day choose for you.</p>
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:11px">
+          <sc-for list="{{ chips }}" as="chip" hint-placeholder-count="6">
+            <button onClick="{{ chip.onClick }}" style="{{ chip.style }}">{{ chip.iconEl }}<span>{{ chip.label }}</span> <small style="{{ chip.smallStyle }}">{{ chip.count }}</small></button>
+          </sc-for>
+        </div>
+
+        <div style="margin-top:22px">
+          <button onClick="{{ onShuffle }}" style="cursor:pointer;background:transparent;color:#2e5a4f;border:1.5px solid #2e5a4f;font:600 15px 'Hanken Grotesk';border-radius:999px;padding:11px 19px;display:inline-flex;align-items:center;gap:8px" style-hover="background:rgba(46,90,79,.08)">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h4l8 10h4M4 17h4l3-3.5M16 7h4M17 4l3 3-3 3M17 14l3 3-3 3"/></svg>
+            Surprise me with a moment
+          </button>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:18px;margin-top:28px">
+          <sc-for list="{{ cards }}" as="card" hint-placeholder-count="8">
+            <button onClick="{{ card.onClick }}" style="position:relative;text-align:left;cursor:pointer;font-family:inherit;color:inherit;background:#fbf6ec;border:1px solid #e6d8c2;border-radius:18px;padding:22px 22px 20px;overflow:hidden;display:block;transition:transform .2s,box-shadow .2s,border-color .2s" style-hover="transform:translateY(-4px);box-shadow:0 20px 38px -24px rgba(70,48,20,.24);border-color:#d8c4a6">
+              <span style="position:absolute;top:18px;right:18px;font:600 11px 'Hanken Grotesk';letter-spacing:.12em;text-transform:uppercase;color:#a08e78">{{ card.clusterLabel }}</span>
+              <span style="width:54px;height:54px;display:grid;place-items:center;border-radius:13px;margin-bottom:14px">{{ card.iconEl }}</span>
+              <span style="display:block;font:600 12px 'Hanken Grotesk';letter-spacing:.05em;text-transform:uppercase;color:#d8932a">{{ card.origin }}</span>
+              <span style="display:block;font-family:'Spectral',serif;font-weight:600;font-size:22px;margin:6px 0 1px">{{ card.name }}</span>
+              <span style="display:block;margin:9px 0 0;color:#6f5e4b;font-size:14.5px;line-height:1.5">{{ card.ess }}</span>
+              <span style="display:block;margin:12px 0 0;font:600 10.5px 'Hanken Grotesk';letter-spacing:.13em;text-transform:uppercase;color:#bcae97">{{ card.meta }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </section>
+
+      <footer style="margin-top:78px;padding:46px 0 64px;border-top:1px solid #e6d8c2;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:40px">
+        <div>
+          <h4 style="font-family:'Spectral',serif;font-weight:500;font-size:22px;margin:0 0 8px">The idea is small on purpose.</h4>
+          <p style="color:#6f5e4b;font-size:14.5px;margin:0 0 12px;max-width:52ch">Across the world, people keep words for the good little parts of being alive that English never quite named: lingering at the table after a meal, the first beer outdoors after a long winter, doing nothing at all and meaning it.</p>
+          <p style="color:#6f5e4b;font-size:14.5px;margin:0;max-width:52ch">This guide gathers a handful of them. The point isn't to learn the vocabulary. It's to do the thing.</p>
+        </div>
+        <div>
+          <h4 style="font-family:'Spectral',serif;font-weight:500;font-size:22px;margin:0 0 8px">A note of respect</h4>
+          <p style="font-size:13px;color:#a08e78;margin:0;max-width:48ch">Several of these words come from living cultures and traditions, some sacred. They're shared here with care and curiosity, not as decoration. Treat them, and the people they belong to, gently.</p>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+  <sc-if value="{{ sheetOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ onScrimClick }}" style="position:fixed;inset:0;z-index:60;background:rgba(34,22,8,.5);backdrop-filter:blur(4px);padding:24px;overflow-y:auto;display:flex;align-items:flex-start;justify-content:center">
+      <div onClick="{{ stopSheet }}" style="background:#fbf6ec;border-radius:24px;width:100%;max-width:620px;margin:auto;box-shadow:0 40px 90px -30px rgba(34,22,8,.6);overflow:hidden;animation:rise .4s cubic-bezier(.2,.7,.3,1)">
+        <div style="position:relative;padding:30px 32px 26px;background:linear-gradient(155deg,rgba(46,90,79,.10),rgba(243,194,90,.18));border-bottom:1px solid #e6d8c2">
+          <button onClick="{{ onCloseSheet }}" aria-label="Close" style="position:absolute;top:18px;right:18px;width:38px;height:38px;border-radius:999px;border:1px solid #e6d8c2;background:#fbf6ec;cursor:pointer;display:grid;place-items:center;color:#6f5e4b">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </button>
+          <div style="width:66px;height:66px;color:{{ accent }};margin-bottom:12px">{{ sheet.iconEl }}</div>
+          <div style="font:700 12.5px 'Hanken Grotesk';letter-spacing:.14em;text-transform:uppercase;color:#b8542f">{{ sheet.origin }}</div>
+          <h2 style="font-family:'Spectral',serif;font-weight:600;font-size:38px;margin:6px 0 4px;letter-spacing:-.01em">{{ sheet.name }}</h2>
+          <span style="display:inline-flex;align-items:center;gap:8px;color:#6f5e4b;font-size:15px;font-style:italic">{{ sheet.pron }}
+            <button onClick="{{ onSay }}" aria-label="Hear it spoken" style="border:none;background:rgba(46,90,79,.12);color:#2e5a4f;cursor:pointer;width:30px;height:30px;border-radius:999px;display:grid;place-items:center">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M16 8a5 5 0 0 1 0 8"/><path d="M19 5a9 9 0 0 1 0 14"/></svg>
+            </button>
+          </span>
+        </div>
+        <div style="padding:26px 32px 30px">
+          <p style="font-size:17.5px;line-height:1.55;margin:0 0 22px;color:#2a2119">{{ sheet.lead }}</p>
+
+          <div style="display:flex;gap:14px;padding:0 0 15px">
+            <div style="flex:none;width:34px;height:34px;border-radius:9px;display:grid;place-items:center;color:#2e5a4f;background:rgba(46,90,79,.09)"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></div>
+            <div style="flex:1"><h5 style="margin:0 0 5px;font:600 12px 'Hanken Grotesk';letter-spacing:.16em;text-transform:uppercase;color:#a08e78">How to do it</h5>
+              <ol style="margin:0;padding-left:18px">
+                <sc-for list="{{ sheet.how }}" as="step" hint-placeholder-count="3"><li style="font-size:15px;margin-bottom:5px;color:#2a2119;line-height:1.5">{{ step }}</li></sc-for>
+              </ol>
+            </div>
+          </div>
+          <div style="display:flex;gap:14px;padding:15px 0;border-top:1px solid #e6d8c2">
+            <div style="flex:none;width:34px;height:34px;border-radius:9px;display:grid;place-items:center;color:#2e5a4f;background:rgba(46,90,79,.09)"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+            <div style="flex:1"><h5 style="margin:0 0 4px;font:600 12px 'Hanken Grotesk';letter-spacing:.16em;text-transform:uppercase;color:#a08e78">When it happens</h5><p style="margin:0;font-size:15px;color:#2a2119;line-height:1.55">{{ sheet.when }}</p></div>
+          </div>
+
+          <div style="margin:22px 0 0;padding:16px 18px;border-radius:14px;background:rgba(243,194,90,.16);border:1px solid rgba(216,147,42,.32)">
+            <h5 style="margin:0 0 3px;font:700 12px 'Hanken Grotesk';letter-spacing:.16em;text-transform:uppercase;color:#b8542f">What it leaves you with</h5>
+            <p style="margin:0;font-size:15.5px;font-style:italic;color:#2a2119">{{ sheet.feel }}</p>
+          </div>
+
+          <sc-if value="{{ sheet.caution }}" hint-placeholder-val="{{ false }}">
+            <div style="margin:20px 0 0;padding:13px 16px;border-radius:13px;background:rgba(184,84,47,.08);border:1px solid rgba(184,84,47,.26);display:flex;gap:11px">
+              <svg viewBox="0 0 24 24" width="18" height="18" style="flex:none;margin-top:1px" fill="none" stroke="#b8542f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 4.3 2.6 18a2 2 0 0 0 1.7 3h15.4a2 2 0 0 0 1.7-3L13.7 4.3a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+              <div><h5 style="margin:0 0 2px;font:700 11px 'Hanken Grotesk';letter-spacing:.14em;text-transform:uppercase;color:#b8542f">Hold this gently</h5><p style="margin:0;font-size:13.5px;color:#8a4326;line-height:1.5">{{ sheet.caution }}</p></div>
+            </div>
+          </sc-if>
+          <p style="margin:18px 0 0;font-size:13px;color:#a08e78;line-height:1.5">{{ sheet.note }}</p>
+
+          <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap">
+            <sc-if value="{{ sheet.showBegin }}" hint-placeholder-val="{{ false }}">
+              <button onClick="{{ onBegin }}" style="cursor:pointer;border:none;background:{{ accent }};color:#fdf6e9;font:600 15px 'Hanken Grotesk';border-radius:999px;padding:12px 20px;display:inline-flex;align-items:center;gap:8px">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 5v14l11-7z"/></svg>Begin this moment
+              </button>
+            </sc-if>
+            <button onClick="{{ onCollect }}" style="cursor:pointer;background:transparent;color:#2e5a4f;border:1.5px solid #2e5a4f;font:600 15px 'Hanken Grotesk';border-radius:999px;padding:12px 20px;display:inline-flex;align-items:center;gap:8px">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>I did this — gather it
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ momentOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:80;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff8ee;padding:30px;background:{{ momentBg }}">
+      <p style="font-family:'Spectral',serif;font-size:clamp(30px,6vw,52px);font-weight:500;margin:0">{{ mWord }}</p>
+      <p style="font-size:17px;max-width:30ch;opacity:.92;margin:10px 0 0;font-style:italic">{{ mFeel }}</p>
+      <div style="position:relative;width:240px;height:240px;margin:42px 0;display:grid;place-items:center">
+        <div style="{{ breathStyle }}"></div>
+        <div style="font-family:'Spectral',serif;font-size:46px;font-weight:500;z-index:2">{{ mCount }}</div>
+        <div style="position:absolute;bottom:-34px;font:600 13px 'Hanken Grotesk';letter-spacing:.22em;text-transform:uppercase;opacity:.85">{{ mCue }}</div>
+      </div>
+      <div style="display:flex;gap:13px;flex-wrap:wrap;justify-content:center">
+        <button onClick="{{ onMDone }}" style="cursor:pointer;border:none;background:rgba(255,248,238,.94);color:#2a2119;font:600 15px 'Hanken Grotesk';border-radius:999px;padding:12px 22px;display:inline-flex;align-items:center;gap:8px">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>I did it
+        </button>
+        <button onClick="{{ onMClose }}" style="cursor:pointer;background:transparent;color:#fff8ee;border:1.5px solid rgba(255,248,238,.6);font:600 15px 'Hanken Grotesk';border-radius:999px;padding:12px 22px">Leave quietly</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ toastShow }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:#2e5a4f;color:#fdf6e9;padding:13px 22px;border-radius:999px;font:600 15px 'Hanken Grotesk';z-index:90;box-shadow:0 16px 30px -12px rgba(34,22,8,.5);display:flex;align-items:center;gap:9px;animation:fadein .3s ease both">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="#f3c25a"><path d="M12 2l2.4 5.6L20 8l-4 4 1 6-5-3-5 3 1-6-4-4 5.6-.4z"/></svg>
+      <span>{{ toastMsg }}</span>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;timeOfDay&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Auto&quot;,&quot;Dawn&quot;,&quot;Morning&quot;,&quot;Midday&quot;,&quot;Afternoon&quot;,&quot;Evening&quot;,&quot;Night&quot;],&quot;default&quot;:&quot;Auto&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Atmosphere&quot;},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#2e5a4f&quot;,&quot;options&quot;:[&quot;#2e5a4f&quot;,&quot;#b8542f&quot;,&quot;#d8932a&quot;,&quot;#3a4a6b&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Atmosphere&quot;},&quot;reduceMotion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Atmosphere&quot;}}">
+class Component extends DCLogic {
+  state = { filter:'all', gathered:0, current:null, sheetOpen:false, momentOpen:false, momentRunning:false, remaining:0, cue:'settle in', toastShow:false, toastMsg:'' };
+
+  componentDidMount(){
+    try{ const g=parseInt(localStorage.getItem('sgm_gathered')||'0',10); if(g>0) this.setState({gathered:g}); }catch(e){}
+    this._key=(e)=>{ if(e.key!=='Escape')return; if(this.state.momentOpen)this.closeMoment(); else if(this.state.sheetOpen)this.setState({sheetOpen:false}); };
+    document.addEventListener('keydown',this._key);
+  }
+  componentWillUnmount(){ document.removeEventListener('keydown',this._key); clearInterval(this._timer); clearTimeout(this._toastT); }
+
+  /* ----- icon helpers ----- */
+  icon(k,px,color){
+    const html=(this.ICON[k]||this.ICON.wabisabi||'').replace('<svg ','<svg width="100%" height="100%" ');
+    return React.createElement('span',{style:{width:px,height:px,display:'inline-flex',color:color||'inherit',flex:'none'},dangerouslySetInnerHTML:{__html:html}});
+  }
+  globe(active){
+    return React.createElement('span',{style:{width:22,height:22,display:'inline-flex',color:active?'#f3c25a':(this.props.accent||'#2e5a4f'),flex:'none'},dangerouslySetInnerHTML:{__html:'<svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18M3 12h18"/></svg>'}});
+  }
+
+  /* ----- time / phase ----- */
+  phaseFor(h){
+    if(h>=5&&h<8)  return {key:'dawn',name:'Dawn',sky:['#7c89c4','#e9a6a0','#f4c79a'],ground:'#3a3550',ritual:'gokotta',line:'the early risers are out listening for the first birds.'};
+    if(h>=8&&h<11) return {key:'morning',name:'Morning',sky:['#7fb7e0','#bfe0ee','#f6ead0'],ground:'#2e5a4f',ritual:'fika',line:'somewhere a kettle is on and the morning break is sacred.'};
+    if(h>=11&&h<15)return {key:'midday',name:'Midday',sky:['#6bb6e6','#a9d8f0','#f7eccb'],ground:'#2e5a4f',ritual:'dolcefarniente',line:'the sun is high — a fine time to do nothing, sweetly.'};
+    if(h>=15&&h<18)return {key:'afternoon',name:'Afternoon',sky:['#7eaad6','#e6c98a','#f3b46a'],ground:'#3d4a55',ritual:'utepils',line:'the light is golden and made for a drink in the sun.'};
+    if(h>=18&&h<21)return {key:'evening',name:'Evening',sky:['#48598f','#c66f7e','#f0a35e'],ground:'#33304e',ritual:'sobremesa',line:'plates are clearing, but no one is leaving the table.'};
+    return {key:'night',name:'Night',sky:['#1c2142','#2b2f52','#4a3a60'],ground:'#171a33',ritual:'hygge',line:'the dark is for warmth, candlelight and being indoors.'};
+  }
+  curHour(){
+    const t=this.props.timeOfDay||'Auto';
+    const rep={Dawn:6.5,Morning:9.5,Midday:13,Afternoon:16.5,Evening:19.5,Night:23};
+    if(t!=='Auto'&&rep[t]!=null) return rep[t];
+    const n=new Date(); return n.getHours()+n.getMinutes()/60;
+  }
+  shade(hex,amt){ const n=parseInt(hex.slice(1),16);let r=(n>>16)+amt,g=((n>>8)&255)+amt,b=(n&255)+amt; r=Math.max(0,Math.min(255,r));g=Math.max(0,Math.min(255,g));b=Math.max(0,Math.min(255,b)); return '#'+((1<<24)+(r<<16)+(g<<8)+b).toString(16).slice(1); }
+  buildScene(h,p){
+    const isNight=p.key==='night';
+    let t; if(isNight){ let nh=(h>=21)?h-21:h+3; t=nh/9; } else { t=(h-6)/12; }
+    t=Math.max(0.05,Math.min(0.95,t));
+    const cx=60+t*880, cy=272-Math.sin(t*Math.PI)*210;
+    let cel;
+    if(isNight){ cel=`<circle cx="${cx.toFixed(0)}" cy="${cy.toFixed(0)}" r="26" fill="#f4ead2"/><circle cx="${(cx+9).toFixed(0)}" cy="${(cy-7).toFixed(0)}" r="26" fill="${p.sky[1]}"/>`; }
+    else { cel=`<circle cx="${cx.toFixed(0)}" cy="${cy.toFixed(0)}" r="58" fill="#fff4d6" opacity=".32"/><circle cx="${cx.toFixed(0)}" cy="${cy.toFixed(0)}" r="33" fill="#ffe9a8"/><circle cx="${cx.toFixed(0)}" cy="${cy.toFixed(0)}" r="33" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="2"/>`; }
+    if(!this._stars){ let s=''; for(let i=0;i<46;i++){const x=Math.random()*1000,y=Math.random()*150;s+=`<circle cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="${(Math.random()*1.3+.4).toFixed(1)}" fill="#fff" style="animation:tw 4s ease-in-out infinite;animation-delay:${(Math.random()*4).toFixed(1)}s"/>`;} this._stars=s; }
+    const stars=isNight?`<g>${this._stars}</g>`:'';
+    const backFill=this.shade(p.ground,18), backOp=isNight?'.9':'.55';
+    return `<svg viewBox="0 0 1000 330" preserveAspectRatio="xMidYMax slice" style="position:absolute;inset:0;width:100%;height:100%;display:block">${stars}<path d="M0 330 V250 Q250 196 500 232 T1000 244 V330Z" fill="${backFill}" opacity="${backOp}"/><path d="M0 330 V288 Q200 250 460 282 Q720 312 1000 274 V330Z" fill="${p.ground}"/>${cel}</svg>`;
+  }
+
+  /* ----- actions ----- */
+  setFilter=(id)=>this.setState({filter:id});
+  byKey(k){ return this.R.find(x=>x.k===k); }
+  openSheet=(k)=>{ this.setState({current:k,sheetOpen:true}); };
+  onCloseSheet=()=>this.setState({sheetOpen:false});
+  onScrimClick=()=>this.setState({sheetOpen:false});
+  stopSheet=(e)=>{ if(e&&e.stopPropagation)e.stopPropagation(); };
+  onShuffle=()=>{ const r=this.R[Math.floor(Math.random()*this.R.length)]; this.openSheet(r.k); };
+  onSay=()=>{ const r=this.byKey(this.state.current); if(!r||!('speechSynthesis'in window))return; const u=new SpeechSynthesisUtterance(r.name); u.rate=.82; speechSynthesis.cancel(); speechSynthesis.speak(u); };
+
+  collect=(name)=>{
+    const g=this.state.gathered+1;
+    try{ localStorage.setItem('sgm_gathered',String(g)); }catch(e){}
+    this.setState({gathered:g,toastShow:true,toastMsg:name?name+' — gathered':'Moment gathered'});
+    clearTimeout(this._toastT); this._toastT=setTimeout(()=>this.setState({toastShow:false}),2400);
+  };
+  onCollect=()=>{ const r=this.byKey(this.state.current); this.setState({sheetOpen:false}); this.collect(r?r.name:''); };
+
+  onBegin=()=>{ const k=this.state.current; this.setState({sheetOpen:false}); setTimeout(()=>this.beginMoment(k),140); };
+  beginMoment=(k)=>{
+    const r=this.byKey(k); if(!r)return;
+    const cues=['breathe in','hold','breathe out','hold'];
+    this._ci=0;
+    this.setState({current:k,momentOpen:true,momentRunning:true,remaining:(r.mins||3)*60,cue:'settle in'});
+    clearInterval(this._timer);
+    this._timer=setInterval(()=>{
+      const rem=this.state.remaining-1;
+      let cue=this.state.cue, running=true;
+      if(rem%3===0){ cue=cues[this._ci%cues.length]; this._ci++; }
+      if(rem<=0){ clearInterval(this._timer); cue='whenever you are ready'; running=false; this.setState({remaining:0,cue,momentRunning:false}); return; }
+      this.setState({remaining:rem,cue,momentRunning:running});
+    },1000);
+  };
+  closeMoment=()=>{ clearInterval(this._timer); this.setState({momentOpen:false,momentRunning:false}); };
+  onMClose=()=>this.closeMoment();
+  onMDone=()=>{ const r=this.byKey(this.state.current); clearInterval(this._timer); this.setState({momentOpen:false,momentRunning:false}); this.collect(r?r.name:''); };
+
+  renderVals(){
+    const A=this.props.accent||'#2e5a4f';
+    const reduce=!!this.props.reduceMotion;
+    const h=this.curHour();
+    const phase=this.phaseFor(h);
+    const now=new Date(); const days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    const dateLabel=days[now.getDay()]+' · '+now.getHours()+':'+String(now.getMinutes()).padStart(2,'0');
+
+    // now card
+    const nr=this.byKey(phase.ritual)||this.R[0];
+    const nowIconEl=this.icon(nr.k,40,A);
+    const nowPhaseLabel=phase.name+' · the world right now';
+    const nowLine=phase.line+'  —  '+nr.name+', '+nr.pron;
+
+    const skyBg=`linear-gradient(to bottom, ${phase.sky[0]} 0%, ${phase.sky[1]} 48%, ${phase.sky[2]} 100%)`;
+    const skySceneEl=React.createElement('div',{style:{position:'absolute',inset:0},dangerouslySetInnerHTML:{__html:this.buildScene(h,phase)}});
+
+    // chips
+    const chipBase="display:inline-flex;align-items:center;gap:9px;cursor:pointer;background:#fbf6ec;border:1.5px solid #e6d8c2;color:#2a2119;font:600 14px 'Hanken Grotesk';padding:9px 16px 9px 11px;border-radius:999px;transition:.18s";
+    const mkChip=(id,label,count,iconEl)=>{
+      const active=this.state.filter===id;
+      const style=chipBase+(active?`;background:${A};border-color:${A};color:#fdf6e9`:'');
+      const smallStyle=active?"color:rgba(253,246,233,.72);font-weight:600;font-size:12px":"color:#a08e78;font-weight:500;font-size:12px";
+      return {id,label,count:String(count),iconEl,style,smallStyle,onClick:()=>this.setFilter(id)};
+    };
+    const chips=[ mkChip('all','All moments',this.R.length,this.globe(this.state.filter==='all')) ];
+    for(const [cid,c] of Object.entries(this.CLUSTERS)){
+      const active=this.state.filter===cid;
+      const n=this.R.filter(r=>r.c===cid).length;
+      chips.push(mkChip(cid,c.label,c.sub,this.icon(c.iconKey,22,active?'#f3c25a':A)));
+      chips[chips.length-1].count=c.sub; // show descriptor instead of count
+    }
+
+    // cards
+    const items=this.R.filter(r=>this.state.filter==='all'||r.c===this.state.filter);
+    const cards=items.map(r=>({
+      k:r.k,name:r.name,origin:(r.o.split(' · ')[1]||r.o),ess:r.ess,
+      meta:(r.mins>0?r.mins+' min moment':(r.p?'A small ritual':'A reflection')),
+      clusterLabel:this.CLUSTERS[r.c].label,iconEl:this.icon(r.k,38,A),onClick:()=>this.openSheet(r.k)
+    }));
+
+    // sheet
+    let sheet=null;
+    const cr=this.byKey(this.state.current);
+    if(cr){ sheet={ iconEl:this.icon(cr.k,60,A),origin:cr.o,name:cr.name,pron:'/ '+cr.pron+' /',lead:cr.lead,how:cr.how,when:cr.when,feel:cr.feel,note:cr.note||this.NOTE,caution:cr.caution||'',showBegin:(cr.mins>0) }; }
+
+    // moment
+    const rem=Math.max(0,this.state.remaining);
+    const mCount=Math.floor(rem/60)+':'+String(rem%60).padStart(2,'0');
+    const momentBg=`linear-gradient(160deg, ${phase.sky[0]}, ${phase.sky[2]})`;
+    const breathStyle="position:absolute;inset:0;border-radius:999px;background:radial-gradient(circle,rgba(255,248,238,.3),rgba(255,248,238,.06) 70%);border:2px solid rgba(255,248,238,.55)"+((this.state.momentRunning&&!reduce)?";animation:breathe 11s ease-in-out infinite":";transform:scale(.85)");
+
+    return {
+      accent:A, gathered:this.state.gathered, dateLabel,
+      skyBg, skySceneEl,
+      nowIconEl, nowPhaseLabel, nowName:nr.name, nowLine, onTryNow:()=>this.openSheet(nr.k),
+      chips, onShuffle:this.onShuffle,
+      cards,
+      sheetOpen:this.state.sheetOpen, sheet,
+      onCloseSheet:this.onCloseSheet, onScrimClick:this.onScrimClick, stopSheet:this.stopSheet,
+      onSay:this.onSay, onBegin:this.onBegin, onCollect:this.onCollect,
+      momentOpen:this.state.momentOpen, mWord:cr?cr.name:'', mFeel:cr?cr.feel:'', mCount, mCue:this.state.cue, momentBg, breathStyle,
+      onMDone:this.onMDone, onMClose:this.onMClose,
+      toastShow:this.state.toastShow, toastMsg:this.state.toastMsg
+    };
+  }
+}
+
+/* ===== static data attached to prototype ===== */
+const S='stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"';
+const H='fill="#d8932a" stroke="#d8932a" stroke-width="1.2"';
+function svg(inner){return `<svg viewBox="0 0 40 40" ${S}>${inner}</svg>`;}
+Component.prototype.ICON={
+  niksen: svg('<rect x="8" y="9" width="24" height="22" rx="2"/><path d="M20 9v22M8 20h24"/><path d="M24 13c2.2 0 3.2 1.6 1.6 2.8 1.8.3 1.6 2.4-.3 2.4h-3.2" '+H+'/>'),
+  dolcefarniente: svg('<circle cx="13" cy="12" r="4" '+H+'/><path d="M7 12h-2M13 5V3M18 9l1.4-1.4M8 9 6.6 7.6"/><path d="M6 28c4-3 8-3 12 0M6 28h22M27 22v6"/><path d="M27 22c3 0 5 2 5 5h-5"/>'),
+  fjaka: svg('<path d="M10 26c0-5 4-8 9-8 4 0 6 2 6 5 0 2-2 3-4 3-1.5 0-2.5-1-2.5-2 0-.8.6-1.4 1.4-1.4"/><circle cx="27" cy="14" r="2.4"/><path d="M27 11.6V9M30 14h2.4M24.5 14H22.5"/><path d="M6 28h28"/>'),
+  keyif: svg('<path d="M14 12h12l-1.5 12a3 3 0 0 1-3 2.6h-3a3 3 0 0 1-3-2.6z"/><path d="M20 9c-1 1.4 0 2.4 0 3.6" '+H+'/><path d="M11 30h18"/>'),
+  hygge: svg('<rect x="14" y="16" width="12" height="16" rx="2"/><path d="M20 16v-3"/><path d="M20 6c2 2.5 3 4 3 5.6A3 3 0 0 1 17 11.6C17 10 18 8.5 20 6z" '+H+'/>'),
+  meriggiare: svg('<circle cx="14" cy="13" r="3.4" '+H+'/><path d="M14 6.5V4M9 13H6.5M9.8 8.8 8 7M20 11l-1.6-1.6"/><path d="M26 13c-4 0-7 3-7 7v8M26 13c4 0 7 3 7 7h-7"/><path d="M14 28h22"/>'),
+  friluftsliv: svg('<path d="M5 30 14 16l5 7 4-6 12 13z"/><path d="M14 16l3.5 5M28 24l-5-7"/><circle cx="29" cy="11" r="3" '+H+'/>'),
+  shinrinyoku: svg('<path d="M12 30v-9M12 21c-3 0-4-2-4-4 0-3 4-9 4-9s4 6 4 9c0 2-1 4-4 4z"/><path d="M27 30v-7M27 23c-2.5 0-3.5-1.6-3.5-3.4 0-2.6 3.5-7.6 3.5-7.6s3.5 5 3.5 7.6c0 1.8-1 3.4-3.5 3.4z"/><path d="M7 30h26"/>'),
+  gokotta: svg('<path d="M9 22c0-5 4-8 8-8 3 0 5 2 5 4.5 0 1.5-1 2.5-2.4 2.5M9 22c0 3 2.5 5 6 5 4 0 7-3 7-7"/><path d="M22 18.5 30 15M30 15l-2.5 3.5M30 15l-3.4-1.5"/><circle cx="13" cy="19" r="1" fill="currentColor"/><path d="M28 24l1.5-1.5M31 26l1.5-1.5" '+H+'/>'),
+  uitwaaien: svg('<path d="M6 14h14a3 3 0 1 0-3-3M6 20h20a3 3 0 1 1-3 3M6 26h11a2.5 2.5 0 1 1-2.5 2.5"/><path d="M30 12c2 1 3 3 3 5" '+H+'/>'),
+  utepils: svg('<path d="M13 12h10v17a2 2 0 0 1-2 2h-6a2 2 0 0 1-2-2z"/><path d="M23 16h3a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-3"/><path d="M13 18h10" '+H+'/><circle cx="29" cy="9" r="2.4" '+H+'/><path d="M29 6.6V5"/>'),
+  mangata: svg('<path d="M27 9a8 8 0 1 0 4 12 7 7 0 0 1-4-12z" '+H+'/><path d="M6 26h28M9 30h22M13 22h8" opacity=".9"/>'),
+  fika: svg('<path d="M9 17h17v8a4 4 0 0 1-4 4h-9a4 4 0 0 1-4-4z"/><path d="M26 19h3a2.5 2.5 0 0 1 0 5h-3"/><path d="M14 10c-1 1.4 0 2.6 0 4M20 9c-1 1.4 0 2.6 0 4" '+H+'/>'),
+  sobremesa: svg('<path d="M8 16h7v5a3.5 3.5 0 0 1-7 0z"/><path d="M22 16h8v5a4 4 0 0 1-8 0z"/><path d="M11 12c-.6 1 0 1.8 0 2.6M26 11c-.6 1 0 1.8 0 2.6" '+H+'/><path d="M5 30h30"/>'),
+  aperitivo: svg('<path d="M10 11h18l-9 10z"/><path d="M19 21v9M13 30h12"/><circle cx="25" cy="14" r="2.4" '+H+'/><path d="M25 11.6V10"/>'),
+  merienda: svg('<path d="M8 18h14v6a4 4 0 0 1-4 4h-6a4 4 0 0 1-4-4z"/><path d="M22 20h3a2 2 0 0 1 0 4h-3"/><path d="M27 13c3 1 4 3.5 1 5-3 1.5-1 3.5 1 3" '+H+'/>'),
+  gongfucha: svg('<path d="M9 18c0-2 2-3 5-3h6c3 0 5 1 5 3 0 5-3 9-8 9s-8-4-8-9z"/><path d="M25 18h4a2.5 2.5 0 0 1 0 5"/><path d="M9 18l-1.5-2M22 15l1.5-2"/><path d="M15 11c-.6 1 0 1.8 0 2.6" '+H+'/>'),
+  harahachibu: svg('<path d="M7 18h26c0 7-6 12-13 12S7 25 7 18z"/><path d="M9.5 23h21" '+H+'/><path d="M5 18h30"/>'),
+  gezelligheid: svg('<path d="M9 15h9v9a4.5 4.5 0 0 1-9 0z"/><path d="M22 15h9v9a4.5 4.5 0 0 1-9 0z"/><path d="M13 10c-.6 1 0 2 0 2.6M27 10c-.6 1 0 2 0 2.6" '+H+'/>'),
+  craic: svg('<path d="M6 10h14a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-7l-4 4v-4H6a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2z"/><path d="M25 15h8a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2v3l-3-3h-3"/><circle cx="11" cy="15" r="1" '+H+'/><circle cx="15" cy="15" r="1" '+H+'/>'),
+  passeggiata: svg('<circle cx="13" cy="8" r="2.6"/><path d="M13 11v8M13 14l-4 3M13 14l4 2M9 28l4-9M17 28l-4-9"/><circle cx="28" cy="9" r="2.2" '+H+'/><path d="M28 11.5v6l-3 2.5M28 17l3 2M25 28l3-8.5M31 28l-3-8" opacity=".85"/>'),
+  renao: svg('<path d="M13 7v3M13 10c-3 0-5 2-5 5v4h10v-4c0-3-2-5-5-5z" '+H+'/><path d="M8 19l-1 4h12l-1-4M13 23v4"/><path d="M27 7v3M27 10c-2.5 0-4 1.6-4 4v3h8v-3c0-2.4-1.5-4-4-4z"/><path d="M23 17l-1 3.5h10L31 17M27 20.5V24"/>'),
+  hooponopono: svg('<path d="M20 30s-9-6-9-13a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 7-9 13-9 13z" '+H+'/><path d="M14 17l6 4 6-4" stroke="#fbf6ec"/>'),
+  cwtch: svg('<path d="M6 14c0-2 3-3 5-1l9 8 9-8c2-2 5-1 5 1 0 3-3 5-3 8v6H9v-6c0-3-3-5-3-8z"/><path d="M20 21l-4-3.6M20 21l4-3.6"/><path d="M20 14a3 3 0 0 1 0-2" '+H+'/>'),
+  parea: svg('<circle cx="20" cy="11" r="3.2"/><circle cx="11" cy="24" r="3.2"/><circle cx="29" cy="24" r="3.2"/><path d="M20 14.5 11 21M20 14.5 29 21M14 24h12" opacity=".7"/><circle cx="20" cy="20" r="1" '+H+'/>'),
+  ikigai: svg('<path d="M20 31c0-7 0-10-4-13M20 31c0-7 0-10 4-13M20 31V14"/><circle cx="20" cy="10" r="4" '+H+'/><path d="M20 6V3"/>'),
+  lagom: svg('<path d="M20 6v22M9 28h22"/><path d="M20 9 8 14M20 9l12 5"/><path d="M8 14c0 2.4 2 4 4 4s4-1.6 4-4M24 14c0 2.4 2 4 4 4s4-1.6 4-4"/>'),
+  wabisabi: svg('<path d="M30 20a10 10 0 1 1-7-9.5" '+H+'/><path d="M27 9c1.5.6 2.6 1.8 3.2 3.4"/>'),
+  sisu: svg('<path d="M20 32V18M20 18c-2.6 0-3.8-2-3.8-3.8 0-3 3.8-8 3.8-8s3.8 5 3.8 8c0 1.8-1.2 3.8-3.8 3.8z" '+H+'/><path d="M20 26l-5 4M20 26l5 4M20 22l-4 3M20 22l4 3"/>'),
+  ubuntu: svg('<circle cx="20" cy="9" r="2.6"/><circle cx="9" cy="18" r="2.6"/><circle cx="31" cy="18" r="2.6"/><circle cx="14" cy="29" r="2.6"/><circle cx="26" cy="29" r="2.6"/><path d="M20 11.5 11 16M20 11.5 29 16M11 20l3 7M29 20l-3 7M16 29h8" opacity=".7"/>'),
+  saudade: svg('<path d="M6 26h28M9 30h22"/><path d="M14 24l4-12 9 12z"/><path d="M18 12v12" '+H+'/>'),
+  kaizen: svg('<path d="M6 30h6v-6h6v-6h6v-6h6"/><circle cx="9" cy="27" r="1.4" fill="currentColor"/><circle cx="15" cy="21" r="1.4" fill="currentColor"/><circle cx="21" cy="15" r="1.4" fill="currentColor"/><circle cx="27" cy="9" r="2.4" '+H+'/>'),
+  mononoaware: svg('<path d="M14 6c5 1 8 5 8 10M14 6c-1 5 1 9 5 11"/><path d="M24 20c-1 2-1 4 0 6-2-1-3.4-3-3.4-5M28 26c-3 1-6-.4-7.4-3" '+H+'/>'),
+  koselig: svg('<svg viewBox="0 0 40 40" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M20 6c3 5 5 7 5 11a5 5 0 0 1-10 0c0-2.5 1.5-4 2-6 .8 2 3 2 3-1 0-2-.6-3 0-4z" '+H+'/><path d="M10 31l8-5M30 31l-8-5M9 31h22"/></svg>'),
+  mysa: svg('<svg viewBox="0 0 40 40" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"><rect x="9" y="11" width="22" height="18" rx="6"/><path d="M13 16c2 3 12 3 14 0M13 24c2-3 12-3 14 0"/><path d="M20 8c-.6 1 0 1.6 0 2.6" '+H+'/></svg>'),
+  gemutlichkeit: svg('<svg viewBox="0 0 40 40" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M11 18v-3a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v3"/><path d="M9 18h22v7a2 2 0 0 1-2 2H11a2 2 0 0 1-2-2z"/><path d="M9 21c-2 0-2-3 0-3M31 21c2 0 2-3 0-3"/><path d="M13 27v3M27 27v3"/></svg>'),
+  feierabend: svg('<svg viewBox="0 0 40 40" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M5 26h30"/><path d="M11 26a9 9 0 0 1 18 0" '+H+'/><path d="M20 11V8M30 16l1.6-1.6M10 16l-1.6-1.6M32 22h2M6 22h2"/></svg>'),
+  kalsarikannit: svg('<svg viewBox="0 0 40 40" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M8 18 20 9l12 9"/><path d="M11 17v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V17"/><path d="M17 21h6l-.7 6a1.5 1.5 0 0 1-1.5 1.3h-1.6A1.5 1.5 0 0 1 17.7 27z" '+H+'/></svg>'),
+  wuwei: svg('<svg viewBox="0 0 40 40" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M6 16c4-4 8 4 14 0s10-4 14 0"/><path d="M6 24c4-4 8 4 14 0s10-4 14 0"/><circle cx="20" cy="20" r="1.4" '+H+'/></svg>'),
+  waldeinsamkeit: svg('<svg viewBox="0 0 40 40" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M20 7l5 8h-3l4 6h-3l3 5H14l3-5h-3l4-6h-3z"/><path d="M20 26v6"/><path d="M14 32c2-2 10-2 12 0" '+H+'/></svg>'),
+  komorebi: svg('<svg viewBox="0 0 40 40" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"><circle cx="13" cy="12" r="4" '+H+'/><path d="M13 5.5V4M7 12H5.5M8.8 7.8 7 6M18.2 7.8 20 6"/><path d="M31 14c-7 0-11 4-11 11 0 0 11 1 11-11z"/><path d="M20 25 30 15"/><circle cx="25" cy="22" r="1" fill="currentColor"/><circle cx="22" cy="26" r="1" fill="currentColor"/></svg>'),
+  psithurism: svg('<svg viewBox="0 0 40 40" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M23 14c-7 0-11 4-11 11 0 0 11 1 11-11z"/><path d="M12 25 23 14"/><path d="M24 9c4-1 7 0 9 2M26 16c3-1 6 0 8 2" '+H+'/></svg>'),
+  borrel: svg('<svg viewBox="0 0 40 40" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M9 11h8l-1 7a3 3 0 0 1-6 0z"/><path d="M13 18v9M9 30h8"/><path d="M23 11h8l-1 7a3 3 0 0 1-6 0z" '+H+'/><path d="M27 18v9M23 30h8"/></svg>'),
+  volta: svg('<svg viewBox="0 0 40 40" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"><circle cx="17" cy="8" r="2.6"/><path d="M17 11v8M17 14l-4 3M17 14l4 2M13 30l4-9M21 30l-4-9"/><path d="M27 13c2 0 3 2 3 4" '+H+'/></svg>'),
+  retrouvailles: svg('<svg viewBox="0 0 40 40" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"><circle cx="12" cy="11" r="2.6"/><path d="M12 14v6M9 30l3-10M15 30l-3-10"/><circle cx="28" cy="11" r="2.6"/><path d="M28 14v6M25 30l3-10M31 30l-3-10"/><path d="M20 14c1.3-1.7 3.2-.4 3.2 1.3 0 1.6-3.2 3.7-3.2 3.7s-3.2-2.1-3.2-3.7c0-1.7 1.9-3 3.2-1.3z" '+H+'/></svg>'),
+  talkoot: svg('<svg viewBox="0 0 40 40" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M11 15c0 4 3 6 9 6s9-2 9-6"/><path d="M11 20c0 4 3 6 9 6s9-2 9-6"/><path d="M11 25c0 4 3 6 9 6s9-2 9-6"/><circle cx="20" cy="9" r="2.2" '+H+'/></svg>'),
+  nunchi: svg('<svg viewBox="0 0 40 40" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M4 20c5-8 27-8 32 0-5 8-27 8-32 0z"/><circle cx="20" cy="20" r="4.2"/><circle cx="20" cy="20" r="1.4" '+H+'/></svg>'),
+  natsukashii: svg('<svg viewBox="0 0 40 40" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"><rect x="9" y="9" width="22" height="18" rx="2"/><path d="M13 23l5-6 4 4 3-3 4 5"/><circle cx="16" cy="15" r="1.6" '+H+'/><path d="M16 31h8M20 27v4"/></svg>'),
+  sukha: svg('<svg viewBox="0 0 40 40" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M20 28c-6 0-10-3-10-3s2-7 6-7c0 0-1-5 4-9 5 4 4 9 4 9 4 0 6 7 6 7s-4 3-10 3z"/><path d="M20 28c0-4 0-7-3-10M20 28c0-4 0-7 3-10" '+H+'/></svg>'),
+  eudaimonia: svg('<svg viewBox="0 0 40 40" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M20 31V12"/><path d="M20 20c-4 0-7-2-7-6 4 0 7 2 7 6zM20 16c4 0 7-2 7-6-4 0-7 2-7 6z" '+H+'/><path d="M20 26c-3 0-5-2-5-5 3 0 5 2 5 5z"/></svg>'),
+  joiedevivre: svg('<svg viewBox="0 0 40 40" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"><circle cx="20" cy="20" r="6" '+H+'/><path d="M20 6v4M20 30v4M6 20h4M30 20h4M10 10l3 3M30 30l-3-3M30 10l-3 3M10 30l3-3"/></svg>'),
+  dadirri: svg('<svg viewBox="0 0 40 40" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M20 13a2.2 2.2 0 1 0 0 4.4 2.2 2.2 0 0 0 0-4.4z" '+H+'/><path d="M12 23c2.5-2.5 5.5-2.5 8 0s5.5 2.5 8 0M8 28c4-3.5 8-3.5 12 0s8 3.5 12 0"/></svg>'),
+};
+Component.prototype.CLUSTERS={
+  pause:{label:'Pause',sub:'rest & doing nothing',iconKey:'fjaka'},
+  outside:{label:'Outside',sub:'air, light & nature',iconKey:'friluftsliv'},
+  savour:{label:'Savour',sub:'food, drink & the table',iconKey:'fika'},
+  gather:{label:'Gather',sub:'people & warmth',iconKey:'gezelligheid'},
+  reflect:{label:'Reflect',sub:'meaning & quiet',iconKey:'wabisabi'},
+};
+Component.prototype.NOTE='A word borrowed with care. Cultural meanings run deeper than any single description can hold.';
+Component.prototype.R=[{"k":"niksen","c":"pause","name":"Niksen","o":"Dutch · Netherlands","pron":"NIK-sen","ess":"The fine art of doing absolutely nothing, on purpose.","lead":"Not scrolling, not resting up for the next task — just being idle and letting it be enough.","how":["Sit or lie somewhere comfortable with nothing to achieve.","Let your gaze drift out a window or across the room.","When the urge to be useful arrives, notice it and let it pass."],"when":"Any pocket of unclaimed time. The Dutch call the good version lekker niksen — \"delicious nothing\".","feel":"A loosening in the chest. Rest without a reason, which turns out to be the best kind.","mins":3,"note":"Popularised internationally around 2019 as a Dutch antidote to busyness.","p":true},{"k":"dolcefarniente","c":"pause","name":"Dolce far niente","o":"Italian · Italy","pron":"DOL-chay far nee-EN-tay","ess":"The sweetness of doing nothing — and savouring it.","lead":"Idleness with no guilt attached, treated as one of life’s real pleasures rather than a lapse.","how":["Step away from the to-do list entirely.","Find sun, shade, a good chair, a slow drink.","Let the minutes go uncounted."],"when":"A long lunch, a warm afternoon, a Sunday with no plans. Alone or with someone easy to be with.","feel":"Time slows and stops feeling like something to spend.","mins":5,"note":"Tied to Italy’s slower regional rhythms and its Blue Zone longevity.","p":true},{"k":"fjaka","c":"pause","name":"Fjaka","o":"Croatian · Dalmatia","pron":"FYAH-kah","ess":"A blissful, dreamy slowing-down. Laziness, perfected.","lead":"A celebrated Dalmatian state of being so relaxed you barely move, and feel no need to.","how":["Wait for the heat of the day or a heavy, full feeling after a meal.","Find shade and somewhere to recline.","Surrender. Resistance is the only thing that can ruin it."],"when":"Hot afternoons, especially in summer along the coast.","feel":"Total, unbothered ease. The world can wait.","mins":5,"note":"A point of regional pride along the Adriatic coast.","p":true},{"k":"keyif","c":"pause","name":"Keyif","o":"Turkish · Türkiye","pron":"kay-EEF","ess":"Quiet, intentional idle pleasure — usually with tea and a view.","lead":"Carving out a small, savoured pause in the day for no reason other than that it feels good.","how":["Make tea or coffee, properly.","Take it somewhere with a view — a balcony, a kerb, the sea.","Drink it slowly and watch the world go by."],"when":"Stolen at any hour. Often shared, often silent.","feel":"A settled, unhurried contentment. The oxygen of an ordinary day.","mins":4,"note":"Often cited as a Turkish wellbeing word that standard happiness measures miss.","p":true},{"k":"hygge","c":"pause","name":"Hygge","o":"Danish · Denmark","pron":"HOO-guh","ess":"Cosy contentment, built from small warm things.","lead":"Candlelight, wool socks, a hot drink, easy company — comfort assembled on purpose against the dark.","how":["Lower the lights; light a candle if you have one.","Make something warm to hold.","Gather what comforts you — a blanket, a book, a person — and stay put."],"when":"Autumn and winter evenings especially. Alone or with a close few.","feel":"Safe, warm, and quietly glad to be exactly where you are.","mins":4,"note":"A hallmark of Danish identity — and the most commercialised word here. Keep it about atmosphere, not products.","caution":"Heavily commercialised abroad — present it as a feeling, not a shopping list.","p":true},{"k":"meriggiare","c":"pause","name":"Meriggiare","o":"Italian · Italy","pron":"meh-reej-JAH-reh","ess":"To rest in the shade through the hottest part of the day.","lead":"A single beautiful verb for retreating from the midday heat into cool, still shade.","how":["When the sun is high and fierce, stop.","Find a tree, an awning, a shuttered room.","Stay there, slow and quiet, until the heat softens."],"when":"Midday, summer. The original siesta instinct.","feel":"Cool relief and a guilt-free pause in the middle of the day.","mins":5,"note":"The instinct behind the siesta, kept in a single verb.","p":true},{"k":"koselig","c":"pause","name":"Koselig","o":"Norwegian · Norway","pron":"KOOSH-lee","ess":"Warm, convivial cosiness — the Norwegian cousin of hygge.","lead":"A feeling of warmth and togetherness: bonfires, candles, coffee and good company against a winter storm.","how":["Warm and soften the space — light, blankets, a fire if you have one.","Bring in a hot drink and good company, or a good book.","Let it feel unhurried."],"when":"Dark, cold evenings — alone or with others.","feel":"Glowing, sheltered warmth.","note":"Part of a Northern European family of cosiness words, alongside hygge, mysa, gezelligheid and Gemütlichkeit.","mins":4,"p":true},{"k":"mysa","c":"pause","name":"Mysa","o":"Swedish · Sweden","pron":"MEE-sah","ess":"To snuggle down and feel cosy and content, usually at home.","lead":"The Swedish cosiness verb — making yourself comfortable and enjoying a soft, warm moment.","how":["Get comfortable somewhere soft.","Add warmth — a blanket, a drink, low light.","Let yourself settle and enjoy it."],"when":"Evenings at home, especially in colder months.","feel":"Soft, contented, at ease.","note":"Closely related to mysig, its adjective.","mins":4,"p":true},{"k":"gemutlichkeit","c":"pause","name":"Gemütlichkeit","o":"German · Germany","pron":"ge-MOOT-lish-kite","ess":"Warmth, friendliness, belonging and peace of mind.","lead":"A cosy, convivial atmosphere paired with social ease and the feeling of being at home in a place.","how":["Choose a warm, unpretentious setting.","Slow the pace and lower the stakes.","Let comfort and company do the rest."],"when":"Evenings, gatherings, snug rooms.","feel":"Relaxed belonging.","note":"The German member of the cosiness family of words.","mins":4,"p":true},{"k":"feierabend","c":"pause","name":"Feierabend","o":"German · Germany","pron":"FY-er-ah-bent","ess":"The festive, unwound mood at the close of the working day.","lead":"Literally \"celebration evening\" — the moment work stops and rest, not more activity, begins.","how":["Mark a clear end to work — close the laptop, change clothes, step outside.","Do something that is the opposite of the day’s tasks.","Protect it from being eaten by chores."],"when":"Evening, after work.","feel":"Earned release, and the day handed back to you.","note":"A real psychological boundary on the day, grouped among German words of end-of-day pleasure.","mins":0,"p":true},{"k":"kalsarikannit","c":"pause","name":"Kalsarikännit","o":"Finnish · Finland","pron":"KAL-sah-ree-kan-nit","ess":"Drinking at home, in your underwear, with no plan to go out.","lead":"\"Pants drunk\" — unpretentious, solitary decompression with zero social performance.","how":["Cancel any plan to go out.","Get comfortable at home in whatever you like.","Have a drink, or don’t, and do nothing in particular."],"when":"Evenings, alone or with someone very close.","feel":"Freedom from being seen, and total ease.","note":"Has its own officially released Finnish emoji. Kept light and optional given the drink element.","mins":0,"p":true},{"k":"wuwei","c":"pause","name":"Wú wéi","o":"Chinese · China","pron":"woo-WAY","ess":"Effortless action — doing without forcing.","lead":"A central Taoist idea: acting so naturally and in tune with the moment that effort disappears.","how":["Notice where you are straining or forcing.","Loosen your grip on the outcome.","Let the next right action arise rather than driving it."],"when":"A way of approaching tasks rather than a scheduled activity.","feel":"Flow, ease, and less friction.","note":"Rooted in Taoism and alignment with the Tao; best held as a reflective theme.","mins":0,"p":false},{"k":"friluftsliv","c":"outside","name":"Friluftsliv","o":"Norwegian · Norway","pron":"FREE-loofts-leev","ess":"\"Open-air life\" — weaving the outdoors into ordinary days.","lead":"Not a grand expedition. A way of living that keeps you outside in all weathers, all year.","how":["Go outside, whatever the sky is doing.","Walk, sit, ski, swim, forage — anything that fits the day.","Stay long enough to stop checking the time."],"when":"Year-round, by design. There is no bad weather, only the wrong clothes.","feel":"Awake, weathered, and more alive than the indoors allows.","mins":5,"note":"Rooted in 19th-century Norwegian Romanticism and living in tune with nature.","p":true},{"k":"shinrinyoku","c":"outside","name":"Shinrin-yoku","o":"Japanese · Japan","pron":"shin-rin-YOH-koo","ess":"Forest bathing — soaking in the woods through every sense.","lead":"A slow, aimless immersion among trees. No distance to cover, no summit to reach.","how":["Walk into trees and slow right down.","Notice the light, the smell, the sound, the air on your skin.","Let there be no destination at all."],"when":"Any time you can reach trees. Even a small wood will do.","feel":"Measurably calmer — softer breathing, a quieter mind.","mins":5,"note":"Promoted as public health in Japan; backed by research on cortisol and immune markers.","p":true},{"k":"gokotta","c":"outside","name":"Gökotta","o":"Swedish · Sweden","pron":"yo-KOT-ta","ess":"Rising at dawn just to go out and hear the first birdsong.","lead":"Getting up early for no reason but to be outside as the birds begin, and the world wakes.","how":["Set an early alarm, before the day demands anything.","Step outside as the light comes up.","Stand still and just listen."],"when":"Early spring and summer mornings, before the day begins.","feel":"Wonder, and a private head start on the morning.","mins":4,"note":"A Swedish savouring word for the private pleasure of the early morning.","p":true},{"k":"uitwaaien","c":"outside","name":"Uitwaaien","o":"Dutch · Netherlands","pron":"OUT-vai-en","ess":"To walk into the wind to clear your head.","lead":"Literally \"to wind out\" — going out into a brisk day to be blown clean of whatever’s clouding you.","how":["Pick a blustery day instead of avoiding it.","Walk into the wind — coast, field, hilltop.","Let it pull the noise out of your head."],"when":"Whenever it’s windy and your thoughts feel tangled.","feel":"Scrubbed clean and clear-headed.","mins":4,"note":"A Dutch word for fresh-air walking and its restorative effect.","p":true},{"k":"utepils","c":"outside","name":"Utepils","o":"Norwegian · Norway","pron":"OO-teh-pilss","ess":"The first beer enjoyed outdoors in the sun after winter.","lead":"A small national celebration: the first cold drink taken outside once the sun finally returns.","how":["Wait for the first properly warm, bright day.","Take a cold drink outside — step, bench, park, anywhere.","Tip your face to the sun and toast the light coming back."],"when":"The first warm days of spring, then all summer long.","feel":"Pure, communal relief that winter is over.","mins":3,"note":"A small Norwegian celebration of revelry and the return of the light.","p":true},{"k":"mangata","c":"outside","name":"Mångata","o":"Swedish · Sweden","pron":"MOHN-gah-ta","ess":"The shimmering, road-like reflection of the moon on water.","lead":"A word for a thing most people have seen and never named: the glittering moon-path across the sea.","how":["On a clear night near water, find the moon.","Follow its light down to where it meets the surface.","Watch the path it lays across the water."],"when":"Clear nights beside still or moving water.","feel":"Small, quiet awe — and the urge to share it.","mins":3,"note":"Paired with the Turkish gümüşservi for the same moonlit phenomenon.","p":true},{"k":"waldeinsamkeit","c":"outside","name":"Waldeinsamkeit","o":"German · Germany","pron":"VALD-ine-zam-kite","ess":"The soothing solitude of being alone in the woods.","lead":"A mysterious, slightly sublime feeling of oneness and solitude among trees.","how":["Go alone into woodland.","Walk slowly, or sit still.","Let the solitude feel spacious rather than lonely."],"when":"Solo woodland walks, any season.","feel":"Meditative calm with a touch of awe.","note":"Rooted in German Romanticism; a word for freedom and solitude.","mins":5,"p":true},{"k":"komorebi","c":"outside","name":"Komorebi","o":"Japanese · Japan","pron":"koh-moh-REH-bee","ess":"Sunlight filtering and dappling through leaves.","lead":"The interplay of light and leaves — a small, fleeting beauty worth pausing for.","how":["Find a tree with sun behind it.","Watch the light scatter through the leaves.","Stay with it a moment before moving on."],"when":"Bright days under trees.","feel":"Gentle delight and present-moment attention.","note":"One of the Japanese words for the aesthetic appreciation of nature.","mins":3,"p":true},{"k":"psithurism","c":"outside","name":"Psithurism","o":"Greek · Greece","pron":"SITH-yoor-iz-um","ess":"The sound of wind rustling through trees.","lead":"A word for one of nature’s quietest pleasures — leaves stirring in the breeze.","how":["Find trees on a breezy day.","Close your eyes and listen.","Let the sound be the whole of your attention."],"when":"Breezy days near trees.","feel":"Calm and quietly soothed.","note":"A Greek word for the sounds and sights of nature.","mins":3,"p":true},{"k":"fika","c":"savour","name":"Fika","o":"Swedish · Sweden","pron":"FEE-ka","ess":"A coffee-and-cake break, taken seriously, with others.","lead":"More than a coffee break. A protected daily pause for a hot drink, something sweet, and company.","how":["Step away from work — fika is not done at your desk.","Make coffee and find something sweet, ideally a cinnamon bun.","Sit with someone and talk about nothing in particular."],"when":"Daily, mid-morning and mid-afternoon. Best shared.","feel":"Reset, connected, and reminded the day isn’t only work.","mins":4,"note":"A protected daily ritual, central to Swedish working life.","p":true},{"k":"sobremesa","c":"savour","name":"Sobremesa","o":"Spanish · Spain & Latin America","pron":"soh-breh-MEH-sah","ess":"The lingering talk at the table after the meal is done.","lead":"\"Over the table\" — the unhurried conversation that keeps everyone seated long after the food is gone.","how":["When the plates are cleared, don’t get up.","Pour another coffee; let the talk wander.","Let leaving be no one’s priority."],"when":"After lunch and dinner — often an hour or more on weekends.","feel":"Closeness, trust, and the warmth of being in no rush to part.","mins":5,"note":"A Spanish word for the pleasure of conversation continuing past the food.","p":true},{"k":"aperitivo","c":"savour","name":"Aperitivo","o":"Italian · Italy","pron":"ah-peh-ree-TEE-vo","ess":"A pre-dinner drink and snack that opens the evening.","lead":"A gentle ritual marking the seam between the working day and the night, with a drink and small bites.","how":["In the early evening, pour a light drink.","Set out a few small things to nibble.","Let it slow you down before dinner, not fill you up."],"when":"Early evening, before dinner. Usually with others.","feel":"The day exhales; the evening begins.","mins":4,"note":"Part of the wider European culture of unhurried eating and drinking.","p":true},{"k":"merienda","c":"savour","name":"Merienda","o":"Spanish · Spain","pron":"meh-ree-EN-dah","ess":"A small, sweet afternoon break to bridge the day.","lead":"A light afternoon snack — coffee or chocolate with something to eat — to carry you to a late dinner.","how":["Mid-to-late afternoon, pause for a small bite.","Coffee, hot chocolate, a pastry, a piece of bread.","Best taken with family or whoever’s near."],"when":"Late afternoon, daily.","feel":"A gentle lift in the long stretch before evening.","mins":3,"note":"Common across Spain and much of Latin America.","p":true},{"k":"gongfucha","c":"savour","name":"Gōngfu chá","o":"Chinese · China","pron":"gong-foo CHAH","ess":"Brewing tea slowly, attentively, as a small meditation.","lead":"Tea made with care in a tiny pot, in many short infusions — the doing of it as restful as the drinking.","how":["Warm a small pot and cup.","Brew in short, repeated steeps, watching each one.","Drink slowly; let the ritual hold your attention."],"when":"Unhurried afternoons. Alone for calm, or shared for company.","feel":"Patience, presence, and a settled mind.","mins":5,"note":"A skilled tea practice with both solitary and social forms.","p":true},{"k":"harahachibu","c":"savour","name":"Hara hachi bu","o":"Japanese · Okinawa","pron":"HA-ra HA-chee boo","ess":"Eating until you’re only eighty percent full.","lead":"An Okinawan habit of gentle restraint — stopping a little before fullness, on purpose.","how":["Eat slowly enough to notice how you feel.","Stop when satisfied, not stuffed.","Leave a little room, and let it settle."],"when":"At every meal.","feel":"Light, comfortable, and clear rather than heavy.","mins":0,"note":"Linked to Okinawan longevity. Hold it as gentle and intuitive, never as restriction.","caution":"Not a diet rule — keep the language about comfort, not control.","p":true},{"k":"borrel","c":"savour","name":"Borrel","o":"Dutch · Netherlands","pron":"BOH-rel","ess":"A casual drinks-and-snacks gathering with friends or colleagues.","lead":"An informal social drink, often after work, built around easy company.","how":["Gather a few people, somewhere relaxed.","Put out drinks and simple snacks.","Keep it loose and unscheduled."],"when":"Late afternoon or early evening, social.","feel":"Light, warm conviviality.","note":"A Dutch word for socialising around food and drink.","mins":4,"p":true},{"k":"gezelligheid","c":"gather","name":"Gezelligheid","o":"Dutch · Netherlands","pron":"heh-ZELL-ick-hyte","ess":"Cosy togetherness — the warmth of good company.","lead":"The heart of Dutch life: a shared, convivial warmth that comes from being among people you like.","how":["Bring a few people into a warm, easy space.","Keep it informal — drinks, snacks, no agenda.","Let the conversation and the staying-late do the rest."],"when":"Meals, evenings, café terraces. Almost always with others.","feel":"Belonging, ease, and the glow of good company.","mins":4,"note":"From gezel, \"companion\" — the social cousin of the cosiness words.","p":true},{"k":"parea","c":"gather","name":"Parea","o":"Greek · Greece","pron":"pah-REH-ah","ess":"Your close companionship group, and the joy of simply being together.","lead":"A circle of friends gathered to share food, drink, talk and time, with no purpose beyond the company itself.","how":["Gather your regular few.","Share a long table, food and drink.","Let the evening run with no end-time."],"when":"Evenings and long meals, social.","feel":"Deep belonging and unhurried friendship.","note":"A Greek word for socialising around food and drink.","mins":4,"p":true},{"k":"craic","c":"gather","name":"Craic","o":"Irish · Ireland","pron":"crack","ess":"Lively talk, laughter and good times together.","lead":"The whole warm bundle of fun, banter and camaraderie that makes a gathering worth being at.","how":["Get a few people together, ideally somewhere lively.","Trade stories, slag each other off, laugh.","Stay for the conversation, not the schedule."],"when":"Pubs, kitchens, anywhere people gather. \"What’s the craic?\"","feel":"Lifted, connected, sides aching from laughing.","mins":4,"note":"\"What’s the craic?\" is everyday Irish usage.","p":true},{"k":"passeggiata","c":"gather","name":"Passeggiata","o":"Italian · Italy","pron":"pah-seh-JAH-tah","ess":"A leisurely evening stroll to see and greet your neighbours.","lead":"The slow communal walk through town in the evening — to move a little, and to be among everyone else doing the same.","how":["In the early evening, go out for a slow walk.","Take the main streets or the square; no destination.","Nod, stop, chat. The point is the people."],"when":"Evenings, especially weekends, after the day cools.","feel":"Part of something — a town breathing together.","mins":4,"note":"Akin to the Greek volta and French flâner — strolling without a destination.","p":true},{"k":"renao","c":"gather","name":"Rènao","o":"Chinese · China","pron":"ruh-NOW","ess":"The warm, buzzing liveliness of a happy crowd.","lead":"\"Hot and noisy\" — and entirely a good thing: the vital hum of people, food and festivity together.","how":["Head toward where people gather — a market, a feast, a festival.","Let yourself be carried by the noise and bustle.","Eat, talk, share the crowd’s energy."],"when":"Meals, festivals, especially Lunar New Year. Communal.","feel":"Alive, included, lifted by the crowd.","mins":4,"note":"A positively valued quality of social atmosphere in China.","p":true},{"k":"hooponopono","c":"gather","name":"Hoʻoponopono","o":"Hawaiian · Hawaiʻi","pron":"HO-oh-pono-pono","ess":"A gentle ritual of forgiveness — \"to make right\".","lead":"A practice of releasing resentment and repairing a bond, which can be done quietly, even with yourself.","how":["Bring to mind the person or hurt you’re holding.","Slowly repeat: I’m sorry. Please forgive me. Thank you. I love you.","Let the words loosen what you’ve been carrying."],"when":"Whenever resentment has settled and needs releasing.","feel":"Lighter, softer, and more at peace.","mins":4,"note":"A sacred Hawaiian reconciliation practice. Offered with respect and acknowledgement of its origins.","caution":"A living sacred tradition — frame it respectfully, not as a generic self-help hack.","p":true},{"k":"cwtch","c":"gather","name":"Cwtch","o":"Welsh · Wales","pron":"kutch","ess":"A hug that wraps you in safety — also a safe little space.","lead":"More than an embrace: a hold that says you’re safe here. The word doubles as a cosy nook or cupboard.","how":["Find someone you love.","Hold them like you mean it, without rushing.","Or make a cwtch of a space — a snug corner that feels like shelter."],"when":"Any time warmth or comfort is needed.","feel":"Held, safe, and quietly reassured.","mins":0,"note":"Means both \"to hug\" and \"a safe, welcoming place\".","p":true},{"k":"volta","c":"gather","name":"Volta","o":"Greek · Greece","pron":"VOL-tah","ess":"A relaxed evening stroll, taking in the sights and the people.","lead":"A leisurely walk with no destination, valued for the freedom and the chance to greet passers-by.","how":["Head out in the cool of the evening.","Wander the front, the square or the streets.","Let yourself be unhurried and sociable."],"when":"Evenings, social or solo.","feel":"Freedom, ease and gentle connection.","note":"Paired with the French flâner as a strolling word carrying a sense of possibility.","mins":4,"p":true},{"k":"retrouvailles","c":"gather","name":"Retrouvailles","o":"French · France","pron":"ruh-troo-VYE","ess":"The joy of reuniting with someone after a long time apart.","lead":"Literally \"rediscoveries\" — the happiness of being together again after separation.","how":["Reach out to someone you haven’t seen in too long.","Make the plan to actually meet.","Let the reunion be the whole point."],"when":"Any reunion worth marking.","feel":"Warm, full-hearted reconnection.","note":"A French word for affection and the pull toward those we miss.","mins":0,"p":true},{"k":"talkoot","c":"gather","name":"Talkoot","o":"Finnish · Finland","pron":"TAL-koht","ess":"Coming together to do a shared task for the common good.","lead":"Voluntary collective work — neighbours pitching in together on something that benefits everyone.","how":["Find a task that helps the group — a tidy-up, a build, a harvest.","Invite people to do it together.","Share the work and the company."],"when":"Whenever a shared job needs doing.","feel":"Belonging, and the satisfaction of shared effort.","note":"Grouped with the Norwegian dugnad and Swedish talko as words for collective tasks.","mins":0,"p":true},{"k":"nunchi","c":"gather","name":"Nunchi","o":"Korean · Korea","pron":"NOON-chee","ess":"The art of reading a room and responding with care.","lead":"Literally \"eye-measure\" — sensing the mood and unspoken cues of others to keep social harmony.","how":["Before speaking, take in the room’s mood.","Notice what is unsaid as much as what is said.","Respond in a way that keeps everyone at ease."],"when":"Any social situation.","feel":"Smoother relationships and social ease.","note":"A Korean non-verbal communication skill — better learned than timed.","mins":0,"p":false},{"k":"ikigai","c":"reflect","name":"Ikigai","o":"Japanese · Japan","pron":"EE-kee-guy","ess":"A reason to get up in the morning — found in small daily joys.","lead":"In its true Japanese sense, not a grand life purpose but the small things that make today worth waking for.","how":["Ask what, however small, you look forward to.","Notice the things that absorb you and leave you content.","Make a little more room for them tomorrow."],"when":"A quiet reflection, returned to often.","feel":"Quiet purpose, drawn from ordinary days.","mins":0,"note":"In its true sense, a reason for being drawn from ordinary things. The four-circle Venn diagram is a Western invention, not traditional usage.","caution":"Don’t reduce it to the Western Venn-diagram version — that isn’t authentic.","p":false},{"k":"lagom","c":"reflect","name":"Lagom","o":"Swedish · Sweden","pron":"LAH-gom","ess":"Not too much, not too little — just right.","lead":"A whole philosophy of balance and enough: in work, in things, in how much you take.","how":["Look at one part of life that feels like too much, or too little.","Ask what \"just enough\" would actually be.","Adjust gently toward that, and stop there."],"when":"Whenever life tips toward excess or scarcity.","feel":"Steady, sustainable contentment.","mins":0,"note":"A valued Swedish sense of moderation — not too much, not too little.","p":false},{"k":"wabisabi","c":"reflect","name":"Wabi-sabi","o":"Japanese · Japan","pron":"WAH-bee SAH-bee","ess":"Finding beauty in imperfection and impermanence.","lead":"A way of seeing that values the worn, the aged, the asymmetrical — the marks that make a thing itself.","how":["Pick up something old or imperfect that you own.","Look at the wear, the cracks, the irregularities.","Let them be the beauty, not the flaw."],"when":"Any moment you catch yourself wanting things flawless.","feel":"Acceptance, and a softer eye for the world and yourself.","mins":0,"note":"Drawn from Japanese aesthetics — a beauty found in the worn and irregular.","p":false},{"k":"sisu","c":"reflect","name":"Sisu","o":"Finnish · Finland","pron":"SEE-soo","ess":"Quiet, stubborn courage in the face of hardship.","lead":"The Finnish word for grit — the resolve that shows up after your strength was supposed to run out.","how":["Name the hard thing in front of you, plainly.","Take the next small step, not the whole mountain.","Keep going past the point you’d normally stop."],"when":"When something is hard and quitting is tempting.","feel":"Grounded resolve, and pride that doesn’t need an audience.","mins":0,"note":"The Finnish word for extraordinary determination in the face of adversity.","p":false},{"k":"ubuntu","c":"reflect","name":"Ubuntu","o":"Nguni Bantu · Southern Africa","pron":"uu-BUUN-tuu","ess":"\"I am because we are\" — humanity through one another.","lead":"A southern African ethic that says a person is a person through other people; we become ourselves in community.","how":["Think of someone whose day you could ease.","Do one small, generous thing for them, expecting nothing.","Notice how your own wellbeing is tangled with theirs."],"when":"A daily orientation toward others.","feel":"Connected, useful, part of something larger than yourself.","mins":0,"note":"Desmond Tutu: my humanity is caught up in yours. A serious ethical concept — treated with depth.","p":false},{"k":"saudade","c":"reflect","name":"Saudade","o":"Portuguese · Portugal & Brazil","pron":"sow-DAHD","ess":"A bittersweet longing for someone or something absent.","lead":"A tender, aching nostalgia for a person, place or time that’s gone — half sorrow, half love.","how":["Let the missing-feeling come instead of pushing it away.","Hold the memory gently; let it be sweet as well as sad.","Maybe write it down, or play the song that holds it."],"when":"When something loved feels far away.","feel":"A soft, full-hearted ache that honours what mattered.","mins":0,"note":"A key Portuguese emotion, central to fado music. An ambivalent feeling, not a pick-me-up.","caution":"Melancholic by nature — offered as gentle reflection, never as a mood-fix.","p":false},{"k":"kaizen","c":"reflect","name":"Kaizen","o":"Japanese · Japan","pron":"KY-zen","ess":"Getting better by the smallest possible step.","lead":"Continuous, tiny improvement — change so small it’s almost easy, repeated until it adds up.","how":["Choose one thing you’d like to improve.","Make the next step almost laughably small.","Repeat it tomorrow. Let it compound."],"when":"Any goal that feels too big to start.","feel":"Progress without pressure, and momentum that lasts.","mins":0,"note":"Maps cleanly onto habit-building — one of the few reflective words that is directly doable.","p":true},{"k":"mononoaware","c":"reflect","name":"Mono no aware","o":"Japanese · Japan","pron":"MOH-no no ah-WAH-reh","ess":"The gentle sadness of knowing beautiful things pass.","lead":"The poignant awareness that everything is fleeting — and that its passing is part of its beauty.","how":["Notice something lovely and temporary — blossom, light, a mood.","Let yourself feel that it won’t last.","Let the brevity deepen the beauty instead of spoiling it."],"when":"Cherry blossom, sunsets, last days — any beautiful, passing thing.","feel":"Tender presence, and a richer appreciation of now.","mins":0,"note":"A Japanese word for the bittersweetness of a brief, fading moment of beauty.","p":false},{"k":"natsukashii","c":"reflect","name":"Natsukashii","o":"Japanese · Japan","pron":"nat-soo-KAH-shee","ess":"Fond nostalgia — happy for the memory, sad it is gone.","lead":"A warm, longing pull toward a fond memory, tinged with the sadness that it is no longer.","how":["Let an old memory surface — a song, a smell, a photo.","Sit with the warmth of it.","Let the sweetness and the ache coexist."],"when":"When something stirs a fond memory.","feel":"Warm, wistful tenderness.","note":"A Japanese word for longing and nostalgia.","mins":0,"p":false},{"k":"sukha","c":"reflect","name":"Sukha","o":"Sanskrit · India","pron":"SOO-kah","ess":"Genuine, lasting happiness rooted in inner maturity.","lead":"A stable flourishing that doesn’t depend on circumstance, unlike a fleeting pleasure.","how":["Notice the difference between a passing high and a steady contentment.","Tend the steady kind — through calm, ethics, attention.","Let it be unhurried; it is cultivated, not chased."],"when":"A long-term orientation rather than a single act.","feel":"Deep, durable wellbeing.","note":"A Sanskrit and Buddhist concept; held as a reflective theme.","mins":0,"p":false},{"k":"eudaimonia","c":"reflect","name":"Eudaimonia","o":"Greek · Greece","pron":"yoo-day-MOH-nee-ah","ess":"Flourishing through living well and fully.","lead":"A sense of fulfilment and growth — a life of meaning, not just of good feeling.","how":["Ask what living well means to you, beyond feeling good.","Choose one action that serves it.","Let meaning, not just pleasure, guide the choice."],"when":"A guiding orientation.","feel":"Deep fulfilment.","note":"A foundational idea in positive psychology, drawn from the Greek.","mins":0,"p":false},{"k":"joiedevivre","c":"reflect","name":"Joie de vivre","o":"French · France","pron":"zhwah duh VEE-vruh","ess":"An exuberant zest for life.","lead":"The knack of knowing how to live — a sustained, boundless enjoyment of the here and now.","how":["Find the small pleasure available right now.","Lean into it fully rather than half-noticing.","Let enjoyment be a habit, not an occasion."],"when":"A way of meeting daily life.","feel":"Lightness and a generalised joy.","note":"A French phrase for joy generalised into a philosophy of life.","mins":0,"p":false},{"k":"dadirri","c":"reflect","name":"Dadirri","o":"Ngangikurungkurr · Aboriginal Australia","pron":"dah-DEER-ree","ess":"Deep, still, reflective and respectful listening.","lead":"A contemplative inner stillness — a deep listening to country, to others and to oneself.","how":["Find quiet and stillness.","Listen, without needing to respond or fix.","Let the silence and attention be enough."],"when":"A contemplative practice rather than a quick activity.","feel":"Stillness, connection and renewal.","note":"A sacred Aboriginal Australian practice associated with Miriam-Rose Ungunmerr.","caution":"Sacred Indigenous practice — represented carefully and never trivialised.","mins":0,"p":false}];
+</script>
+</body>
+</html>
