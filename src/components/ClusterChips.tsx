@@ -1,18 +1,19 @@
 import { CLUSTERS, Icon, innerForCluster } from '../lib/icons';
 import type { ClusterId } from '../types';
-import { Globe } from './ui-icons';
+import { Globe, HeartSolid } from './ui-icons';
 
-export type Filter = ClusterId | 'all';
+export type Filter = ClusterId | 'all' | 'favourites';
 
 interface Props {
   active: Filter;
   total: number;
+  favCount: number;
   onChange: (f: Filter) => void;
 }
 
 const CLUSTER_IDS: ClusterId[] = ['pause', 'outside', 'savour', 'gather', 'reflect'];
 
-export default function ClusterChips({ active, total, onChange }: Props) {
+export default function ClusterChips({ active, total, favCount, onChange }: Props) {
   return (
     <div className="chips" role="group" aria-label="Filter rituals by feeling">
       <button
@@ -22,6 +23,14 @@ export default function ClusterChips({ active, total, onChange }: Props) {
       >
         <Globe />
         All moments <small>{total}</small>
+      </button>
+      <button
+        className={`chip${active === 'favourites' ? ' active' : ''}`}
+        aria-pressed={active === 'favourites'}
+        onClick={() => onChange('favourites')}
+      >
+        <HeartSolid />
+        Favourites <small>{favCount}</small>
       </button>
       {CLUSTER_IDS.map((id) => (
         <button

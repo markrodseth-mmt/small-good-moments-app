@@ -1,15 +1,24 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Ritual } from '../types';
 import { CLUSTERS, Icon, innerForRitual } from '../lib/icons';
+import { Heart, HeartSolid } from './ui-icons';
 
 interface Props {
   ritual: Ritual;
   index: number;
+  isFavourite: boolean;
   onOpen: (r: Ritual) => void;
+  onToggleFavourite: (r: Ritual) => void;
 }
 
-export default function RitualCard({ ritual, index, onOpen }: Props) {
-  const ref = useRef<HTMLButtonElement>(null);
+export default function RitualCard({
+  ritual,
+  index,
+  isFavourite,
+  onOpen,
+  onToggleFavourite,
+}: Props) {
+  const ref = useRef<HTMLDivElement>(null);
   const [shown, setShown] = useState(false);
 
   useEffect(() => {
@@ -35,19 +44,28 @@ export default function RitualCard({ ritual, index, onOpen }: Props) {
   }, []);
 
   return (
-    <button
+    <div
       ref={ref}
-      className={`card${shown ? ' in' : ''}`}
+      className={`card-wrap${shown ? ' in' : ''}`}
       style={{ transitionDelay: `${Math.min(index, 6) * 45}ms` }}
-      onClick={() => onOpen(ritual)}
     >
-      <span className="tag">{CLUSTERS[ritual.cluster].label}</span>
-      <span className="ic">
-        <Icon inner={innerForRitual(ritual.id, ritual.cluster)} />
-      </span>
-      <span className="origin">{ritual.region}</span>
-      <h3 className="serif">{ritual.name}</h3>
-      <p className="ess">{ritual.essence}</p>
-    </button>
+      <button className="card" onClick={() => onOpen(ritual)}>
+        <span className="tag">{CLUSTERS[ritual.cluster].label}</span>
+        <span className="ic">
+          <Icon inner={innerForRitual(ritual.id, ritual.cluster)} />
+        </span>
+        <span className="origin">{ritual.region}</span>
+        <h3 className="serif">{ritual.name}</h3>
+        <p className="ess">{ritual.essence}</p>
+      </button>
+      <button
+        className={`fav${isFavourite ? ' on' : ''}`}
+        aria-pressed={isFavourite}
+        aria-label={isFavourite ? `Remove ${ritual.name} from favourites` : `Add ${ritual.name} to favourites`}
+        onClick={() => onToggleFavourite(ritual)}
+      >
+        {isFavourite ? <HeartSolid /> : <Heart />}
+      </button>
+    </div>
   );
 }

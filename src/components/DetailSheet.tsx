@@ -1,10 +1,12 @@
 import { useEffect, useRef } from 'react';
 import type { Ritual } from '../types';
 import { Icon, innerForRitual } from '../lib/icons';
-import { Check, Chevron, Clock, Close, Play, Speaker } from './ui-icons';
+import { Check, Chevron, Clock, Close, Heart, HeartSolid, Play, Speaker } from './ui-icons';
 
 interface Props {
   ritual: Ritual;
+  isFavourite: boolean;
+  onToggleFavourite: (r: Ritual) => void;
   onClose: () => void;
   onBegin: (r: Ritual) => void;
   onGather: (r: Ritual) => void;
@@ -13,7 +15,14 @@ interface Props {
 const NOTE_PREFIX =
   'A word borrowed with care. Cultural meanings run deeper than any single description can hold.';
 
-export default function DetailSheet({ ritual, onClose, onBegin, onGather }: Props) {
+export default function DetailSheet({
+  ritual,
+  isFavourite,
+  onToggleFavourite,
+  onClose,
+  onBegin,
+  onGather,
+}: Props) {
   const sheetRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const restoreTo = useRef<HTMLElement | null>(null);
@@ -149,6 +158,14 @@ export default function DetailSheet({ ritual, onClose, onBegin, onGather }: Prop
             <button className="btn btn-ghost" onClick={() => onGather(ritual)}>
               <Check />
               I did this — gather it
+            </button>
+            <button
+              className={`btn btn-ghost btn-fav${isFavourite ? ' on' : ''}`}
+              aria-pressed={isFavourite}
+              onClick={() => onToggleFavourite(ritual)}
+            >
+              {isFavourite ? <HeartSolid /> : <Heart />}
+              {isFavourite ? 'Saved to favourites' : 'Save to favourites'}
             </button>
           </div>
         </div>

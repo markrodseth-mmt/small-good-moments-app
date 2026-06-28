@@ -39,3 +39,10 @@ export interface GatheredMoment {
   ritual_id: string;
   gathered_at: string;
 }
+
+export interface FavouriteRitual {
+  id: string;
+  user_id: string;
+  ritual_id: string;
+  created_at: string;
+}

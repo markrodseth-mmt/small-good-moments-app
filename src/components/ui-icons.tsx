@@ -60,3 +60,13 @@ export const Play = (p: SVGProps<SVGSVGElement>) => (
 export const Check = (p: SVGProps<SVGSVGElement>) => (
   <svg {...base} {...p}><path d="M5 13l4 4L19 7" /></svg>
 );
+
+export const Heart = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base} {...p}><path d="M12 20s-7-4.35-9.5-8.5C1 8.5 2.5 5.5 5.5 5.5 7.5 5.5 9 7 12 9c3-2 4.5-3.5 6.5-3.5 3 0 4.5 3 3 6C19 15.65 12 20 12 20z" /></svg>
+);
+
+export const HeartSolid = (p: SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...p}>
+    <path d="M12 20s-7-4.35-9.5-8.5C1 8.5 2.5 5.5 5.5 5.5 7.5 5.5 9 7 12 9c3-2 4.5-3.5 6.5-3.5 3 0 4.5 3 3 6C19 15.65 12 20 12 20z" />
+  </svg>
+);

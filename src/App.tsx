@@ -4,6 +4,7 @@ import type { Filter } from './components/ClusterChips';
 import { ensureSession } from './lib/supabase';
 import { fetchRituals } from './lib/rituals';
 import { fetchGathered, gatherMoment, computeStreak } from './lib/moments';
+import { fetchFavourites, addFavourite, removeFavourite } from './lib/favourites';
 import { phaseFor, pickNowRitual } from './lib/timeOfDay';
 import type { GatheredMoment } from './types';
 import AppShell from './components/AppShell';
@@ -21,6 +22,7 @@ export default function App() {
   const [error, setError] = useState<string | null>(null);
 
   const [gathered, setGathered] = useState<GatheredMoment[]>([]);
+  const [favourites, setFavourites] = useState<Set<string>>(new Set());
   const [filter, setFilter] = useState<Filter>('all');
   const [selected, setSelected] = useState<Ritual | null>(null);
   const [moment, setMoment] = useState<Ritual | null>(null);
@@ -35,10 +37,15 @@ export default function App() {
     (async () => {
       try {
         await ensureSession();
-        const [rs, gs] = await Promise.all([fetchRituals(), fetchGathered()]);
+        const [rs, gs, fs] = await Promise.all([
+          fetchRituals(),
+          fetchGathered(),
+          fetchFavourites(),
+        ]);
         if (!alive) return;
         setRituals(rs);
         setGathered(gs);
+        setFavourites(new Set(fs));
       } catch (e) {
         if (!alive) return;
         setError(e instanceof Error ? e.message : 'Something went wrong loading the rituals.');
@@ -67,11 +74,36 @@ export default function App() {
     }
   }
 
+  async function toggleFavourite(r: Ritual) {
+    const wasFav = favourites.has(r.id);
+    // Optimistic update.
+    setFavourites((prev) => {
+      const next = new Set(prev);
+      if (wasFav) next.delete(r.id);
+      else next.add(r.id);
+      return next;
+    });
+    try {
+      if (wasFav) await removeFavourite(r.id);
+      else await addFavourite(r.id);
+    } catch {
+      // Revert on failure.
+      setFavourites((prev) => {
+        const next = new Set(prev);
+        if (wasFav) next.add(r.id);
+        else next.delete(r.id);
+        return next;
+      });
+      showToast('Could not update your favourites — please try again.');
+    }
+  }
+
   const nowRitual = useMemo(() => pickNowRitual(phase, rituals), [phase, rituals]);
-  const visible = useMemo(
-    () => (filter === 'all' ? rituals : rituals.filter((r) => r.cluster === filter)),
-    [filter, rituals],
-  );
+  const visible = useMemo(() => {
+    if (filter === 'all') return rituals;
+    if (filter === 'favourites') return rituals.filter((r) => favourites.has(r.id));
+    return rituals.filter((r) => r.cluster === filter);
+  }, [filter, rituals, favourites]);
   const streak = useMemo(() => computeStreak(gathered), [gathered]);
 
   function openDetail(r: Ritual) {
@@ -102,7 +134,12 @@ export default function App() {
               </p>
             </div>
 
-            <ClusterChips active={filter} total={rituals.length} onChange={setFilter} />
+            <ClusterChips
+              active={filter}
+              total={rituals.length}
+              favCount={favourites.size}
+              onChange={setFilter}
+            />
 
             <div style={{ marginTop: 22, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
               <button
@@ -117,7 +154,19 @@ export default function App() {
 
             {loading && <div className="state">Gathering the world's gentle rituals…</div>}
             {error && <div className="state err">{error}</div>}
-            {!loading && !error && <RitualGrid rituals={visible} onOpen={openDetail} />}
+            {!loading && !error && filter === 'favourites' && visible.length === 0 && (
+              <div className="state">
+                No favourites yet — tap the heart on any moment to keep it here.
+              </div>
+            )}
+            {!loading && !error && visible.length > 0 && (
+              <RitualGrid
+                rituals={visible}
+                favourites={favourites}
+                onOpen={openDetail}
+                onToggleFavourite={toggleFavourite}
+              />
+            )}
           </section>
         </div>
 
@@ -150,6 +199,8 @@ export default function App() {
       {selected && (
         <DetailSheet
           ritual={selected}
+          isFavourite={favourites.has(selected.id)}
+          onToggleFavourite={toggleFavourite}
           onClose={() => setSelected(null)}
           onBegin={beginMoment}
           onGather={(r) => {
