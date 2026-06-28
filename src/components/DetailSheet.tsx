@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import type { Ritual } from '../types';
 import { Icon, innerForRitual } from '../lib/icons';
-import { Check, Chevron, Clock, Close, Heart, HeartSolid, Play, Speaker } from './ui-icons';
+import { Check, Chevron, Clock, Close, Heart, HeartSolid, Play, Share, Speaker } from './ui-icons';
 
 interface Props {
   ritual: Ritual;
@@ -10,6 +10,7 @@ interface Props {
   onClose: () => void;
   onBegin: (r: Ritual) => void;
   onGather: (r: Ritual) => void;
+  onShare: (r: Ritual) => void;
 }
 
 const NOTE_PREFIX =
@@ -22,6 +23,7 @@ export default function DetailSheet({
   onClose,
   onBegin,
   onGather,
+  onShare,
 }: Props) {
   const sheetRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -166,6 +168,10 @@ export default function DetailSheet({
             >
               {isFavourite ? <HeartSolid /> : <Heart />}
               {isFavourite ? 'Saved to favourites' : 'Save to favourites'}
+            </button>
+            <button className="btn btn-ghost" onClick={() => onShare(ritual)}>
+              <Share />
+              Share
             </button>
           </div>
         </div>

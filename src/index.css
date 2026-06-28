@@ -194,6 +194,15 @@ section{padding:62px 0 0;}
 .fav:hover{color:var(--clay);border-color:var(--clay);transform:scale(1.08);}
 .fav.on{color:var(--clay);border-color:var(--clay);}
 .btn-fav.on{color:var(--clay);border-color:var(--clay);}
+.share-btn{
+  position:absolute;bottom:14px;right:60px;z-index:2;
+  width:38px;height:38px;display:grid;place-items:center;
+  border-radius:50%;border:1px solid var(--paper-edge);
+  background:var(--paper-card);color:var(--ink-faint);
+  cursor:pointer;transition:transform .18s,color .18s,border-color .18s,background .18s;
+}
+.share-btn svg{width:18px;height:18px;}
+.share-btn:hover{color:var(--pine);border-color:var(--pine);transform:scale(1.08);}
 .card .ic{
   width:54px;height:54px;color:var(--pine);margin-bottom:16px;
   display:grid;place-items:center;border-radius:13px;
@@ -204,7 +213,7 @@ section{padding:62px 0 0;}
 .card .ic svg{width:38px;height:38px;}
 .card h3{font-family:'Fraunces',serif;font-weight:600;font-size:23px;margin:0 0 1px;letter-spacing:-.005em;}
 .card .origin{font-size:12.5px;letter-spacing:.04em;color:var(--honey);font-weight:600;text-transform:uppercase;}
-.card .ess{margin:11px 0 0;padding-right:42px;color:var(--ink-soft);font-size:14.5px;line-height:1.5;}
+.card .ess{margin:11px 0 0;padding-right:88px;color:var(--ink-soft);font-size:14.5px;line-height:1.5;}
 .card .tag{
   position:absolute;top:18px;right:18px;font-size:11px;letter-spacing:.12em;
   text-transform:uppercase;font-weight:600;color:var(--ink-faint);
@@ -282,6 +291,33 @@ footer .mini{font-size:13px;color:var(--ink-faint);}
 .caution p{margin:0;font-size:14.5px;color:var(--ink);line-height:1.5;}
 .sheet-cta{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;}
 .note{margin:20px 0 0;font-size:13px;color:var(--ink-faint);line-height:1.5;}
+
+/* ---------- SHARE SHEET ---------- */
+.share-sheet{max-width:440px;position:relative;padding:30px 28px 28px;}
+.share-head{padding-right:44px;margin-bottom:20px;}
+.share-head h3{font-family:'Fraunces',serif;font-weight:600;font-size:26px;margin:0 0 4px;letter-spacing:-.01em;}
+.share-head p{margin:0;color:var(--ink-soft);font-size:14.5px;}
+.share-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:12px;}
+.share-tile{
+  display:flex;flex-direction:column;align-items:center;gap:9px;
+  padding:16px 8px;border-radius:16px;cursor:pointer;
+  border:1px solid var(--paper-edge);background:var(--paper);
+  color:var(--ink);font-family:inherit;font-weight:600;font-size:13px;
+  text-decoration:none;transition:transform .18s,box-shadow .18s,border-color .18s;
+}
+.share-tile:hover{transform:translateY(-2px);box-shadow:0 14px 26px -18px var(--shadow);border-color:#d8c4a6;}
+.share-tile .st-ic{
+  width:46px;height:46px;border-radius:50%;display:grid;place-items:center;
+  background:var(--paper-card);color:var(--pine);
+}
+.share-tile .st-ic svg{width:24px;height:24px;}
+.share-tile.whatsapp .st-ic{background:rgba(37,211,102,.16);color:#1ebe57;}
+.share-tile.x .st-ic{background:rgba(20,20,20,.08);color:#111;}
+.share-tile.facebook .st-ic{background:rgba(24,119,242,.14);color:#1877f2;}
+.share-tile.telegram .st-ic{background:rgba(42,158,224,.16);color:#2a9ee0;}
+.share-tile.email .st-ic{background:rgba(216,147,42,.16);color:var(--honey);}
+.share-tile.copy .st-ic{background:rgba(46,90,79,.12);color:var(--pine);}
+.share-tile.native .st-ic{background:rgba(46,90,79,.12);color:var(--pine);}
 
 /* ---------- MOMENT MODE ---------- */
 .moment{

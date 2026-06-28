@@ -6,9 +6,10 @@ interface Props {
   favourites: Set<string>;
   onOpen: (r: Ritual) => void;
   onToggleFavourite: (r: Ritual) => void;
+  onShare: (r: Ritual) => void;
 }
 
-export default function RitualGrid({ rituals, favourites, onOpen, onToggleFavourite }: Props) {
+export default function RitualGrid({ rituals, favourites, onOpen, onToggleFavourite, onShare }: Props) {
   return (
     <div className="grid">
       {rituals.map((r, i) => (
@@ -19,6 +20,7 @@ export default function RitualGrid({ rituals, favourites, onOpen, onToggleFavour
           isFavourite={favourites.has(r.id)}
           onOpen={onOpen}
           onToggleFavourite={onToggleFavourite}
+          onShare={onShare}
         />
       ))}
     </div>

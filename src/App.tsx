@@ -13,6 +13,7 @@ import ClusterChips from './components/ClusterChips';
 import RitualGrid from './components/RitualGrid';
 import DetailSheet from './components/DetailSheet';
 import MomentMode from './components/MomentMode';
+import ShareSheet from './components/ShareSheet';
 import Toast from './components/Toast';
 import { Shuffle } from './components/ui-icons';
 
@@ -26,6 +27,7 @@ export default function App() {
   const [filter, setFilter] = useState<Filter>('all');
   const [selected, setSelected] = useState<Ritual | null>(null);
   const [moment, setMoment] = useState<Ritual | null>(null);
+  const [sharing, setSharing] = useState<Ritual | null>(null);
 
   const [toast, setToast] = useState({ msg: '', show: false });
   const toastTimer = useRef<ReturnType<typeof setTimeout>>();
@@ -109,6 +111,9 @@ export default function App() {
   function openDetail(r: Ritual) {
     setSelected(r);
   }
+  function openShare(r: Ritual) {
+    setSharing(r);
+  }
   function beginMoment(r: Ritual) {
     setSelected(null);
     setTimeout(() => setMoment(r), 120);
@@ -165,6 +170,7 @@ export default function App() {
                 favourites={favourites}
                 onOpen={openDetail}
                 onToggleFavourite={toggleFavourite}
+                onShare={openShare}
               />
             )}
           </section>
@@ -207,7 +213,12 @@ export default function App() {
             gather(r);
             setSelected(null);
           }}
+          onShare={openShare}
         />
+      )}
+
+      {sharing && (
+        <ShareSheet ritual={sharing} onClose={() => setSharing(null)} onToast={showToast} />
       )}
 
       {moment && (

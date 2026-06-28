@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Ritual } from '../types';
 import { CLUSTERS, Icon, innerForRitual } from '../lib/icons';
-import { Heart, HeartSolid } from './ui-icons';
+import { Heart, HeartSolid, Share } from './ui-icons';
 
 interface Props {
   ritual: Ritual;
@@ -9,6 +9,7 @@ interface Props {
   isFavourite: boolean;
   onOpen: (r: Ritual) => void;
   onToggleFavourite: (r: Ritual) => void;
+  onShare: (r: Ritual) => void;
 }
 
 export default function RitualCard({
@@ -17,6 +18,7 @@ export default function RitualCard({
   isFavourite,
   onOpen,
   onToggleFavourite,
+  onShare,
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const [shown, setShown] = useState(false);
@@ -57,6 +59,13 @@ export default function RitualCard({
         <span className="origin">{ritual.region}</span>
         <h3 className="serif">{ritual.name}</h3>
         <p className="ess">{ritual.essence}</p>
+      </button>
+      <button
+        className="share-btn"
+        aria-label={`Share ${ritual.name}`}
+        onClick={() => onShare(ritual)}
+      >
+        <Share />
       </button>
       <button
         className={`fav${isFavourite ? ' on' : ''}`}
