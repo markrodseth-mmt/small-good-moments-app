@@ -83,7 +83,7 @@ header.bar{
 .celestial{transition:transform 1.6s cubic-bezier(.4,0,.2,1);}
 .hero-copy{
   position:absolute;left:0;bottom:0;width:100%;
-  padding:30px 34px;
+  padding:30px 34px 76px;
   background:linear-gradient(to top,rgba(20,12,4,.42),transparent);
   color:#fff8ee;
 }
