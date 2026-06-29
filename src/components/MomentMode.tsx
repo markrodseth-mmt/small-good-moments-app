@@ -7,49 +7,39 @@ interface Props {
   ritual: Ritual;
   phase: Phase;
   onClose: () => void;
-  onDone: (r: Ritual) => void;
+  onDone: (r: Ritual, note: string) => void;
 }
 
-const CUES = ['breathe in', 'hold', 'breathe out', 'hold'];
-
-function fmt(secs: number) {
-  const s = Math.max(0, secs);
-  return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
-}
+// One full breath of the circle is 11s (see .breath keyframe): expand to ~5s,
+// a brief hold, then contract. We sync the cue text to that rhythm.
+const BREATH_MS = 11000;
 
 export default function MomentMode({ ritual, phase, onClose, onDone }: Props) {
-  const total = (ritual.duration_minutes || 3) * 60;
-  const [remaining, setRemaining] = useState(total);
   const [cue, setCue] = useState('settle in');
-  const [running, setRunning] = useState(true);
-  const doneRef = useRef<HTMLButtonElement>(null);
+  const [note, setNote] = useState('');
+  const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    doneRef.current?.focus();
+    closeRef.current?.focus();
     document.body.style.overflow = 'hidden';
     return () => {
       document.body.style.overflow = '';
     };
   }, []);
 
+  // Gently alternate the breathing cue in time with the circle — no countdown.
   useEffect(() => {
-    let ci = 0;
+    const settle = setTimeout(() => setCue('breathe in'), 1600);
+    const half = setTimeout(() => setCue('breathe out'), 1600 + BREATH_MS / 2);
     const id = setInterval(() => {
-      setRemaining((prev) => {
-        const next = prev - 1;
-        if (next % 3 === 0 && next > 0) {
-          setCue(CUES[ci % CUES.length]);
-          ci++;
-        }
-        if (next <= 0) {
-          clearInterval(id);
-          setCue("whenever you're ready");
-          setRunning(false);
-        }
-        return next;
-      });
-    }, 1000);
-    return () => clearInterval(id);
+      setCue('breathe in');
+      setTimeout(() => setCue('breathe out'), BREATH_MS / 2);
+    }, BREATH_MS);
+    return () => {
+      clearTimeout(settle);
+      clearTimeout(half);
+      clearInterval(id);
+    };
   }, []);
 
   useEffect(() => {
@@ -64,26 +54,39 @@ export default function MomentMode({ ritual, phase, onClose, onDone }: Props) {
 
   return (
     <div
-      className={`moment open${running ? ' running' : ''}`}
+      className="moment open running"
       role="dialog"
       aria-modal="true"
       aria-label="Moment mode"
       style={{ background }}
     >
+      <button className="m-leave" ref={closeRef} onClick={onClose}>
+        Leave quietly
+      </button>
+
       <p className="m-word serif">{ritual.name}</p>
       <p className="m-feel">{ritual.feeling}</p>
+
       <div className="ring">
         <div className="breath" />
-        <div className="count">{fmt(remaining)}</div>
         <div className="cue">{cue}</div>
       </div>
+
+      <div className="m-journal">
+        <label htmlFor="momentNote">Anything you'd like to keep from this moment?</label>
+        <textarea
+          id="momentNote"
+          value={note}
+          onChange={(e) => setNote(e.target.value)}
+          placeholder="A thought, a feeling, what you noticed… (optional)"
+          rows={3}
+        />
+      </div>
+
       <div className="m-actions">
-        <button className="btn btn-primary" ref={doneRef} onClick={() => onDone(ritual)}>
+        <button className="btn btn-primary" onClick={() => onDone(ritual, note)}>
           <Check />
           I did it
-        </button>
-        <button className="btn btn-ghost" onClick={onClose}>
-          Leave quietly
         </button>
       </div>
     </div>

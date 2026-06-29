@@ -56,10 +56,12 @@ header.bar{
 .brand b{font-family:'Fraunces',serif;font-weight:600;font-size:19px;letter-spacing:.01em;}
 .gathered{
   display:flex;align-items:center;gap:8px;
-  font-size:13.5px;color:var(--ink-soft);font-weight:500;
+  font-size:13.5px;color:var(--ink-soft);font-weight:500;font-family:inherit;
   background:var(--paper-card);border:1px solid var(--paper-edge);
-  padding:6px 13px;border-radius:999px;transition:transform .25s;
+  padding:6px 13px;border-radius:999px;transition:transform .25s,border-color .18s;
+  cursor:pointer;
 }
+.gathered:hover{border-color:var(--pine);}
 .gathered svg{width:16px;height:16px;color:var(--honey);}
 .gathered.pop{transform:scale(1.12);}
 .gathered b{color:var(--ink);font-weight:700;}
@@ -338,13 +340,52 @@ footer .mini{font-size:13px;color:var(--ink-faint);}
 }
 .moment.running .breath{animation:breathe 11s ease-in-out infinite;}
 @keyframes breathe{0%,100%{transform:scale(.62);opacity:.65}45%{transform:scale(1);opacity:1}55%{transform:scale(1);opacity:1}}
-.ring .count{font-family:'Fraunces',serif;font-size:46px;font-weight:500;z-index:2;}
 .ring .cue{position:absolute;bottom:-34px;font-size:13px;letter-spacing:.22em;text-transform:uppercase;opacity:.8;}
 .m-actions{display:flex;gap:13px;flex-wrap:wrap;justify-content:center;}
 .m-actions .btn-primary{background:rgba(255,248,238,.94);color:var(--ink);}
 .m-actions .btn-primary:hover{background:#fff;}
 .m-actions .btn-ghost{color:#fff8ee;border-color:rgba(255,248,238,.6);}
 .m-actions .btn-ghost:hover{background:rgba(255,248,238,.12);}
+
+/* "Leave quietly" sits unobtrusively in the corner now that there's no timer. */
+.m-leave{
+  position:absolute;top:24px;right:24px;
+  background:transparent;border:none;cursor:pointer;font-family:inherit;
+  color:#fff8ee;opacity:.7;font-size:14px;padding:8px 10px;border-radius:999px;
+  transition:opacity .18s,background .18s;
+}
+.m-leave:hover{opacity:1;background:rgba(255,248,238,.12);}
+
+/* Gentle journalling field inside Moment Mode. */
+.m-journal{width:100%;max-width:420px;margin:8px 0 28px;text-align:center;}
+.m-journal label{
+  display:block;font-size:14px;opacity:.85;margin-bottom:10px;font-style:italic;
+}
+.m-journal textarea{
+  width:100%;resize:none;font-family:inherit;font-size:15px;line-height:1.55;
+  color:#fff8ee;background:rgba(255,248,238,.10);
+  border:1px solid rgba(255,248,238,.35);border-radius:16px;
+  padding:13px 15px;transition:border-color .18s,background .18s;
+}
+.m-journal textarea::placeholder{color:rgba(255,248,238,.55);}
+.m-journal textarea:focus{
+  outline:none;border-color:rgba(255,248,238,.7);background:rgba(255,248,238,.16);
+}
+
+/* "Your moments" history list. */
+.moments-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:18px;}
+.moment-entry{display:flex;gap:14px;align-items:flex-start;}
+.moment-entry .me-ic{width:38px;height:38px;flex:none;color:var(--pine);margin-top:2px;}
+.moment-entry .me-ic svg{width:38px;height:38px;}
+.me-body{flex:1;min-width:0;}
+.me-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
+.me-name{font-size:20px;font-weight:600;color:var(--ink);}
+.me-when{font-size:12.5px;color:var(--ink-faint);font-weight:500;}
+.me-note{
+  margin:6px 0 0;color:var(--ink-soft);font-size:15px;line-height:1.55;
+  font-style:italic;
+  border-left:2px solid var(--paper-edge);padding-left:12px;
+}
 
 .toast{
   position:fixed;left:50%;bottom:30px;transform:translateX(-50%) translateY(20px);

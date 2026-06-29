@@ -13,6 +13,7 @@ import ClusterChips from './components/ClusterChips';
 import RitualGrid from './components/RitualGrid';
 import DetailSheet from './components/DetailSheet';
 import MomentMode from './components/MomentMode';
+import MomentsSheet from './components/MomentsSheet';
 import ShareSheet from './components/ShareSheet';
 import Toast from './components/Toast';
 import { Shuffle } from './components/ui-icons';
@@ -28,6 +29,7 @@ export default function App() {
   const [selected, setSelected] = useState<Ritual | null>(null);
   const [moment, setMoment] = useState<Ritual | null>(null);
   const [sharing, setSharing] = useState<Ritual | null>(null);
+  const [showMoments, setShowMoments] = useState(false);
 
   const [toast, setToast] = useState({ msg: '', show: false });
   const toastTimer = useRef<ReturnType<typeof setTimeout>>();
@@ -66,9 +68,9 @@ export default function App() {
     toastTimer.current = setTimeout(() => setToast((t) => ({ ...t, show: false })), 2400);
   }
 
-  async function gather(r: Ritual) {
+  async function gather(r: Ritual, note?: string) {
     try {
-      const m = await gatherMoment(r.id);
+      const m = await gatherMoment(r.id, note);
       setGathered((prev) => [m, ...prev]);
       showToast(`${r.name} — gathered`);
     } catch {
@@ -121,7 +123,11 @@ export default function App() {
 
   return (
     <>
-      <AppShell gathered={gathered.length} streak={streak} />
+      <AppShell
+        gathered={gathered.length}
+        streak={streak}
+        onOpenMoments={() => setShowMoments(true)}
+      />
 
       <main>
         <Hero phase={phase} nowRitual={nowRitual} onTry={openDetail} />
@@ -221,14 +227,22 @@ export default function App() {
         <ShareSheet ritual={sharing} onClose={() => setSharing(null)} onToast={showToast} />
       )}
 
+      {showMoments && (
+        <MomentsSheet
+          moments={gathered}
+          rituals={rituals}
+          onClose={() => setShowMoments(false)}
+        />
+      )}
+
       {moment && (
         <MomentMode
           ritual={moment}
           phase={phase}
           onClose={() => setMoment(null)}
-          onDone={(r) => {
+          onDone={(r, note) => {
             setMoment(null);
-            gather(r);
+            gather(r, note);
           }}
         />
       )}

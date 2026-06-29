@@ -4,9 +4,10 @@ import { Logo, StarSolid } from './ui-icons';
 interface Props {
   gathered: number;
   streak: number;
+  onOpenMoments: () => void;
 }
 
-export default function AppShell({ gathered, streak }: Props) {
+export default function AppShell({ gathered, streak, onOpenMoments }: Props) {
   const [pop, setPop] = useState(false);
   const first = useRef(true);
 
@@ -38,9 +39,11 @@ export default function AppShell({ gathered, streak }: Props) {
           </span>
           <b>The Small Good Moments</b>
         </button>
-        <div
+        <button
+          type="button"
           className={`gathered${pop ? ' pop' : ''}`}
           title="Moments you've gathered"
+          onClick={onOpenMoments}
         >
           <StarSolid />
           <span className="gl">Gathered&nbsp;</span>
@@ -48,7 +51,7 @@ export default function AppShell({ gathered, streak }: Props) {
           {streak > 1 && (
             <span className="streak">&nbsp;· {streak}-day streak</span>
           )}
-        </div>
+        </button>
       </div>
     </header>
   );

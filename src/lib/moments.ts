@@ -1,11 +1,15 @@
 import { supabase } from './supabase';
 import type { GatheredMoment } from '../types';
 
-/** Insert one "I did this" row for the current user. */
-export async function gatherMoment(ritualId: string): Promise<GatheredMoment> {
+/** Insert one "I did this" row for the current user, with an optional reflection. */
+export async function gatherMoment(
+  ritualId: string,
+  note?: string,
+): Promise<GatheredMoment> {
+  const trimmed = note?.trim();
   const { data, error } = await supabase
     .from('gathered_moments')
-    .insert({ ritual_id: ritualId })
+    .insert({ ritual_id: ritualId, note: trimmed ? trimmed : null })
     .select()
     .single();
   if (error) throw error;

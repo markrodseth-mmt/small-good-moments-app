@@ -38,6 +38,7 @@ export interface GatheredMoment {
   user_id: string;
   ritual_id: string;
   gathered_at: string;
+  note: string | null;
 }
 
 export interface FavouriteRitual {
